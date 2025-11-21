@@ -1,0 +1,238 @@
+# =============================================================================
+# GIT CONFIGURATION
+# Configuración personalizada de Git
+# =============================================================================
+
+[user]
+    # Configura tu nombre y email
+    name = TU_NOMBRE
+    email = tu@email.com
+    # Usa: git config --global user.name "Tu Nombre"
+    # Usa: git config --global user.email "tu@email.com"
+
+[core]
+    # Editor por defecto
+    editor = nano
+
+    # Ignorar cambios en permisos de archivos
+    filemode = false
+
+    # Autocorrección de comandos (después de 0.1 segundos)
+    autocrlf = input
+
+    # Mejor visualización de caracteres especiales
+    quotepath = false
+
+    # Usa más cores para operaciones de git
+    preloadindex = true
+
+[color]
+    # Colores en output
+    ui = auto
+    branch = auto
+    diff = auto
+    status = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = red
+
+[alias]
+    # Shortcuts básicos
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    cm = commit -m
+    ca = commit --amend
+
+    # Logs mejorados
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+    # Ver últimos commits
+    last = log -1 HEAD --stat
+    recent = log -10 --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr)%Creset' --abbrev-commit
+
+    # Diff mejorado
+    df = diff --color --color-words --abbrev
+    dfs = diff --staged
+
+    # Stash con mensaje
+    stsh = stash push -m
+
+    # Listar stashes
+    stashes = stash list
+
+    # Unstage
+    unstage = reset HEAD --
+
+    # Descartar cambios
+    discard = checkout --
+
+    # Deshacer último commit (mantener cambios)
+    undo = reset --soft HEAD~1
+
+    # Deshacer último commit (descartar cambios)
+    reset-hard = reset --hard HEAD~1
+
+    # Ver cambios en archivos
+    changed = diff --name-only
+
+    # Branches ordenados por fecha
+    branches = branch -a --sort=-committerdate
+
+    # Limpiar branches locales que fueron borrados en remoto
+    prune-local = !git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -d
+
+    # Ver contribuidores
+    contributors = shortlog --summary --numbered --email
+
+    # Buscar en commits
+    search = log --all --grep
+
+    # Ver archivos en un commit
+    files = show --pretty="" --name-only
+
+    # Tags ordenados por fecha
+    tags = tag -l --sort=-version:refname
+
+    # Pull con rebase
+    up = pull --rebase --autostash
+
+    # Push forzado más seguro
+    pushf = push --force-with-lease
+
+    # Ver remotes
+    remotes = remote -v
+
+    # Crear branch y hacer checkout
+    cob = checkout -b
+
+    # Crear y publicar branch
+    publish = !git push -u origin $(git branch --show-current)
+
+    # Commits de hoy
+    today = log --since=midnight --author='$(git config user.name)' --oneline
+
+    # Commits de esta semana
+    week = log --since='1 week ago' --author='$(git config user.name)' --oneline
+
+    # Alias útil para ver el estado corto
+    s = status -sb
+
+    # Commit rápido
+    ac = !git add -A && git commit -m
+
+    # Sync con main/master
+    sync = !git fetch origin && git rebase origin/main
+
+[push]
+    # Push solo el branch actual
+    default = current
+
+    # Push tags automáticamente
+    followTags = true
+
+[pull]
+    # Usar rebase por defecto en pull
+    rebase = true
+
+[fetch]
+    # Limpiar referencias remotas automáticamente
+    prune = true
+
+[rebase]
+    # Aplicar autostash automáticamente
+    autoStash = true
+
+[diff]
+    # Detectar renombrados de archivos
+    renames = true
+
+    # Algoritmo de diff mejorado
+    algorithm = histogram
+
+[merge]
+    # Incluir sumario en merge commits
+    log = true
+
+    # Usar diff3 para conflictos (muestra el ancestro común)
+    conflictstyle = diff3
+
+[init]
+    # Branch por defecto
+    defaultBranch = main
+
+[credential]
+    # Cache de credenciales (macOS Keychain)
+    helper = osxkeychain
+
+[help]
+    # Autocorrección de comandos después de 0.1 segundos
+    autocorrect = 1
+
+[branch]
+    # Al crear un branch, automáticamente configurar upstream
+    autoSetupMerge = always
+
+[status]
+    # Mostrar archivos individuales en directorios untracked
+    showUntrackedFiles = all
+
+[transfer]
+    # Verificar objetos recibidos
+    fsckobjects = true
+
+[filter "lfs"]
+    # Git LFS (Large File Storage)
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+# =============================================================================
+# GITIGNORE GLOBAL
+# =============================================================================
+
+# Crear archivo ~/.gitignore_global con:
+# - .DS_Store (macOS)
+# - .vscode/
+# - .idea/
+# - node_modules/
+# - *.log
+#
+# Luego ejecutar:
+# git config --global core.excludesfile ~/.gitignore_global
+
+# =============================================================================
+# NOTES
+# =============================================================================
+
+# Para configurar tu nombre y email:
+#   git config --global user.name "Tu Nombre"
+#   git config --global user.email "tu@email.com"
+#
+# Para ver toda la configuración:
+#   git config --list
+#
+# Para editar este archivo:
+#   git config --global --edit
+#
+# Para crear un .gitignore global:
+#   echo ".DS_Store" >> ~/.gitignore_global
+#   git config --global core.excludesfile ~/.gitignore_global
