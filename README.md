@@ -1,13 +1,25 @@
 # Mac Setup Script
 
+```
+███████╗██╗  ██╗███████╗
+██╔════╝██║  ██║╚══███╔╝
+███████╗███████║  ███╔╝
+╚════██║██╔══██║ ███╔╝
+███████║██║  ██║███████╗
+╚══════╝╚═╝  ╚═╝╚══════╝
+```
+
 Automated script to set up a Mac from scratch. Perfect for when you format your computer or switch to a new Mac.
 
 ## Features
 
-- **Semi-automatic Mode**: Confirms before important changes
+- **Two Installation Modes**:
+  - Sequential mode with confirmations for each step
+  - Interactive menu mode for selective installation
 - **Modular**: Separate scripts by category
 - **Complete**: From Homebrew to custom dotfiles
 - **Smart**: Detects architecture (Apple Silicon/Intel)
+- **Beautiful**: ASCII art banner and colored output
 
 ## What Does It Install?
 
@@ -28,10 +40,18 @@ Automated script to set up a Mac from scratch. Perfect for when you format your 
 - **Python**: pyenv + Python 3.12/3.11 + pipenv + poetry
 
 ### 4. Applications
-- Visual Studio Code
-- Cursor (AI-powered editor)
-- OrbStack (Docker/Linux)
-- Nerd Fonts (FiraCode, Hack, Meslo, JetBrains Mono)
+- **Editors**:
+  - Visual Studio Code
+  - Cursor (AI-powered editor)
+  - Claude Code CLI
+- **Utilities**:
+  - AppCleaner (Complete uninstaller)
+  - Boring Notch (Dynamic Island enhancement)
+  - Bruno (API client)
+- **Containers**:
+  - OrbStack (Docker/Linux alternative)
+- **Fonts**:
+  - Nerd Fonts (FiraCode, Hack, Meslo, JetBrains Mono, Maple Mono)
 
 ### 5. Modern CLI Tools
 - `gh` - GitHub CLI
@@ -58,10 +78,45 @@ Automated script to set up a Mac from scratch. Perfect for when you format your 
 
 ## Quick Start
 
+### 🧪 Test First (Recommended)
+
+Test the script without making any changes to your system:
+
 ```bash
-cd setup-script
-./setup.sh
+./setup.sh --dry-run
 ```
+
+This shows exactly what would be installed without actually installing anything.
+
+**For detailed testing guide, see [TESTING.md](TESTING.md)**
+
+### 🚀 Install
+
+Choose between two modes:
+
+#### Option 1: Sequential Mode (Guided)
+Goes through each component with confirmations:
+```bash
+./setup.sh
+# Select option 1 to continue in sequential mode
+```
+
+#### Option 2: Interactive Menu (Custom)
+Select specific components from a menu:
+```bash
+./setup.sh
+# Then select option 2 for interactive menu
+```
+
+**Menu options:**
+1. Install ALL (complete installation)
+2. Homebrew and basic tools
+3. Zsh and Powerlevel10k
+4. Programming languages (Node, Python, Go)
+5. Applications and fonts
+6. macOS configuration
+7. Dotfiles
+8. Custom installation (multiple selection)
 
 ## Detailed Installation
 
@@ -121,18 +176,19 @@ You can also run individual scripts:
 
 ```
 setup-script/
-├── README.md           # This file
-├── setup.sh            # Main script
-├── scripts/            # Modular scripts
-│   ├── 01-homebrew.sh
-│   ├── 02-zsh.sh
-│   ├── 03-languages.sh
-│   ├── 04-apps.sh
-│   ├── 05-macos.sh
-│   └── 06-dotfiles.sh
-└── dotfiles/           # Configuration files
-    ├── .zshrc
-    └── .gitconfig
+├── README.md              # Main documentation
+├── TESTING.md             # Testing guide
+├── setup.sh               # Main script (both sequential & interactive modes)
+├── scripts/               # Modular installation scripts
+│   ├── 01-homebrew.sh     # Homebrew installation
+│   ├── 02-zsh.sh          # Zsh configuration
+│   ├── 03-languages.sh    # Programming languages
+│   ├── 04-apps.sh         # Applications and fonts
+│   ├── 05-macos.sh        # macOS settings
+│   └── 06-dotfiles.sh     # Dotfiles setup
+└── dotfiles/              # Configuration files
+    ├── .zshrc             # Zsh configuration
+    └── .gitconfig         # Git configuration
 ```
 
 ## Customization
@@ -302,6 +358,24 @@ source ~/.zshrc
 ```bash
 source $ZSH/oh-my-zsh.sh
 ```
+
+## 🧪 Testing Mode (Dry-Run)
+
+**Want to see what the script does before installing?**
+
+```bash
+./setup.sh --dry-run
+```
+
+This **dry-run mode** is completely safe:
+- ✅ Shows exactly what would be installed
+- ✅ Displays all commands that would run
+- ✅ No actual changes to your system
+- ✅ Perfect for testing and review
+
+**Aliases**: `--dry-run`, `--test`, or `-n`
+
+For detailed testing guide, see [scripts/TESTING.md](scripts/TESTING.md)
 
 ## Requirements
 

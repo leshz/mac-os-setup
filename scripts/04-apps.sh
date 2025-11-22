@@ -26,6 +26,10 @@ APPS=(
     "visual-studio-code"    # VSCode
     "cursor"                # Cursor Editor
     "orbstack"              # OrbStack (Docker/Linux alternative)
+    "appcleaner"            # AppCleaner
+    "boring-notch"          # Boring Notch
+    "bruno"                 # Bruno API Client
+    "claude-code"           # Claude Code CLI
 )
 
 for app in "${APPS[@]}"; do
@@ -56,6 +60,7 @@ FONTS=(
     "font-hack-nerd-font"           # Hack con iconos
     "font-meslo-lg-nerd-font"       # Meslo (recomendada para Powerlevel10k)
     "font-jetbrains-mono-nerd-font" # JetBrains Mono con iconos
+    "font-maple-mono"               # Maple Mono
 )
 
 for font in "${FONTS[@]}"; do
@@ -123,15 +128,22 @@ echo -e "\n${BLUE}=== Aplicaciones Instaladas ===${NC}"
 echo -e "Editores:"
 echo -e "  • Visual Studio Code"
 echo -e "  • Cursor"
+echo -e "  • Claude Code CLI"
 echo -e ""
 echo -e "Contenedores:"
 echo -e "  • OrbStack"
+echo -e ""
+echo -e "Utilidades:"
+echo -e "  • AppCleaner"
+echo -e "  • Boring Notch"
+echo -e "  • Bruno (API Client)"
 echo -e ""
 echo -e "Fuentes:"
 echo -e "  • FiraCode Nerd Font"
 echo -e "  • Hack Nerd Font"
 echo -e "  • Meslo LG Nerd Font"
 echo -e "  • JetBrains Mono Nerd Font"
+echo -e "  • Maple Mono"
 echo -e ""
 echo -e "Herramientas CLI Modernas:"
 echo -e "  • gh (GitHub CLI)"
