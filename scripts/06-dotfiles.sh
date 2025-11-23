@@ -73,6 +73,19 @@ else
     echo -e "${YELLOW}⚠ .gitignore_global no encontrado en dotfiles${NC}"
 fi
 
+# starship.toml
+if [[ -f "${DOTFILES_DIR}/starship.toml" ]]; then
+    # Crear directorio .config si no existe
+    mkdir -p "$HOME/.config"
+
+    backup_if_exists "$HOME/.config/starship.toml"
+    cp "${DOTFILES_DIR}/starship.toml" "$HOME/.config/starship.toml"
+
+    echo -e "${GREEN}✓ starship.toml copiado${NC}"
+else
+    echo -e "${YELLOW}⚠ starship.toml no encontrado en dotfiles${NC}"
+fi
+
 # =============================================================================
 # CREAR ESTRUCTURA DE DIRECTORIOS
 # =============================================================================
@@ -140,6 +153,7 @@ echo -e "Archivos configurados:"
 echo -e "  • ~/.zshrc (Zsh configuration)"
 echo -e "  • ~/.gitconfig (Git configuration)"
 echo -e "  • ~/.gitignore_global (Global Git ignore)"
+echo -e "  • ~/.config/starship.toml (Starship prompt)"
 echo -e "  • ~/.ssh/config (SSH configuration)"
 echo -e ""
 echo -e "Directorios creados:"

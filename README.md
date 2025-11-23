@@ -11,6 +11,19 @@
 
 Automated script to set up a Mac from scratch. Perfect for when you format your computer or switch to a new Mac.
 
+## Quick Start
+
+```bash
+# Clone or download this repo
+cd mac-setup
+
+# Option 1: Using Make (Recommended)
+make install
+
+# Option 2: Direct script execution
+./setup.sh
+```
+
 ## Features
 
 - **Two Installation Modes**:
@@ -20,6 +33,7 @@ Automated script to set up a Mac from scratch. Perfect for when you format your 
 - **Complete**: From Homebrew to custom dotfiles
 - **Smart**: Detects architecture (Apple Silicon/Intel)
 - **Beautiful**: ASCII art banner and colored output
+- **Make Support**: Professional Makefile for easy management
 
 ## What Does It Install?
 
@@ -148,9 +162,58 @@ The script will ask you before each section:
 - macOS Settings
 - Dotfiles
 
+## Using Make Commands
+
+The easiest way to manage your setup is using `make`:
+
+### Installation
+```bash
+make install          # Complete installation
+make all              # Same as install
+```
+
+### Individual Components
+```bash
+make homebrew         # Install Homebrew only
+make zsh              # Configure Zsh only
+make langs            # Install Node.js + Python
+make apps             # Install applications + tools
+make macos            # Configure macOS settings
+make dotfiles         # Copy dotfiles
+```
+
+### Verification & Maintenance
+```bash
+make test             # Check what's installed
+make check            # Same as test
+make doctor           # Full system diagnosis
+make version          # Show installed versions
+make update           # Update Homebrew & packages
+make clean            # Clean old backups
+make backup           # Create manual backup
+```
+
+### Dry-Run (Test Before Installing)
+```bash
+make dry-run              # Simulate full installation
+make dry-run-homebrew     # Simulate Homebrew install
+make dry-run-zsh          # Simulate Zsh setup
+make dry-run-langs        # Simulate languages install
+make dry-run-apps         # Simulate apps install
+make dry-run-macos        # Simulate macOS config
+make dry-run-dotfiles     # Simulate dotfiles setup
+```
+
+### Get Help
+```bash
+make                  # Show all available commands
+make help             # Same as above
+make list             # List all targets
+```
+
 ## Individual Scripts
 
-You can also run individual scripts:
+You can also run individual scripts directly:
 
 ```bash
 # Install Homebrew only
@@ -178,6 +241,7 @@ You can also run individual scripts:
 setup-script/
 ├── README.md              # Main documentation
 ├── TESTING.md             # Testing guide
+├── Makefile               # Make commands for easy management
 ├── setup.sh               # Main script (both sequential & interactive modes)
 ├── scripts/               # Modular installation scripts
 │   ├── 01-homebrew.sh     # Homebrew installation
@@ -188,7 +252,9 @@ setup-script/
 │   └── 06-dotfiles.sh     # Dotfiles setup
 └── dotfiles/              # Configuration files
     ├── .zshrc             # Zsh configuration
-    └── .gitconfig         # Git configuration
+    ├── .gitconfig         # Git configuration
+    ├── .gitignore_global  # Global Git ignore
+    └── starship.toml      # Starship prompt config
 ```
 
 ## Customization

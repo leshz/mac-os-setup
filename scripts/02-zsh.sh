@@ -79,14 +79,7 @@ else
     echo -e "${GREEN}✓ zsh-completions ya está instalado${NC}"
 fi
 
-# Instalar Powerlevel10k (tema popular)
-if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]]; then
-    echo -e "\n${BLUE}Instalando tema Powerlevel10k...${NC}"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-    echo -e "${GREEN}✓ Powerlevel10k instalado${NC}"
-    echo -e "${YELLOW}Para configurar Powerlevel10k, ejecuta: p10k configure${NC}"
-else
-    echo -e "${GREEN}✓ Powerlevel10k ya está instalado${NC}"
-fi
+echo -e "\n${BLUE}Nota: Usaremos Starship como prompt (instalado con brew)${NC}"
+echo -e "${YELLOW}Starship es más rápido y personalizable que Powerlevel10k${NC}"
 
 echo -e "\n${GREEN}✓ Configuración de Zsh completada${NC}"

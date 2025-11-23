@@ -10,12 +10,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # THEME
 # =============================================================================
 
-# Set theme
-# Options: "robbyrussell", "agnoster", "powerlevel10k/powerlevel10k"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Para configurar Powerlevel10k, ejecuta: p10k configure
-# Si no quieres usar Powerlevel10k, cambia a "robbyrussell" o "agnoster"
+# Desactivar tema de Oh My Zsh (usaremos Starship)
+ZSH_THEME=""
 
 # =============================================================================
 # OH MY ZSH PLUGINS
@@ -66,8 +62,14 @@ source $ZSH/oh-my-zsh.sh
 # =============================================================================
 
 # Preferred editor
-export EDITOR='nano'
-export VISUAL='code'
+# Si Neovim está instalado, usarlo como editor por defecto
+if command -v nvim &> /dev/null; then
+  export EDITOR='nvim'
+  export VISUAL='nvim'
+else
+  export EDITOR='nano'
+  export VISUAL='code'
+fi
 
 # =============================================================================
 # HOMEBREW
@@ -156,6 +158,15 @@ fi
 # Inicializar atuin si está instalado
 if command -v atuin &> /dev/null; then
   eval "$(atuin init zsh)"
+fi
+
+# =============================================================================
+# STARSHIP PROMPT
+# =============================================================================
+
+# Inicializar Starship prompt si está instalado
+if command -v starship &> /dev/null; then
+  eval "$(starship init zsh)"
 fi
 
 # =============================================================================
@@ -262,6 +273,13 @@ alias path='echo $PATH | tr ":" "\n"'
 
 # Quick edits
 alias hosts="sudo $EDITOR /etc/hosts"
+
+# Neovim aliases
+if command -v nvim &> /dev/null; then
+  alias vim="nvim"
+  alias vi="nvim"
+  alias v="nvim"
+fi
 
 # =============================================================================
 # FUNCTIONS
@@ -374,6 +392,3 @@ echo ""
 
 # Source local zshrc if exists (for machine-specific configs)
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

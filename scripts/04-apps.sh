@@ -92,6 +92,8 @@ CLI_EXTRAS=(
     "atuin"     # Historial de shell mejorado
     "lazygit"   # Git UI en terminal
     "gping"     # Ping con gráfico bonito
+    "starship"  # Prompt moderno y rápido
+    "neovim"    # Editor de texto moderno (vim mejorado)
 )
 
 for tool in "${CLI_EXTRAS[@]}"; do
@@ -119,6 +121,11 @@ fi
 # Configurar atuin
 if command -v atuin &> /dev/null; then
     echo -e "${BLUE}atuin instalado (se configurará en .zshrc)${NC}"
+fi
+
+# Configurar starship
+if command -v starship &> /dev/null; then
+    echo -e "${BLUE}Starship instalado (se configurará en .zshrc)${NC}"
 fi
 
 echo -e "\n${GREEN}✓ Todas las aplicaciones instaladas${NC}"
@@ -156,8 +163,12 @@ echo -e "  • zoxide (cd inteligente)"
 echo -e "  • atuin (historial mejorado)"
 echo -e "  • lazygit (Git UI)"
 echo -e "  • gping (ping visual)"
+echo -e "  • starship (prompt moderno)"
+echo -e "  • neovim (editor moderno)"
 echo -e ""
 echo -e "${YELLOW}Notas:${NC}"
-echo -e "  • Cambia la fuente de tu terminal a una Nerd Font para ver iconos"
+echo -e "  • Cambia la fuente de tu terminal a una Nerd Font para ver iconos con Starship"
 echo -e "  • Usa 'z <dir>' en lugar de 'cd' para navegar con zoxide"
 echo -e "  • Usa 'lg' para abrir lazygit en un repositorio"
+echo -e "  • Usa 'nvim' o 'vim' para abrir Neovim"
+echo -e "  • Starship se configurará automáticamente en tu shell"
