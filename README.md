@@ -41,9 +41,9 @@ make install
 - Package manager for macOS
 - Basic CLI tools (git, wget, curl, tree, jq)
 
-### 2. Zsh + Oh My Zsh
+### 2. Zsh + Oh My Zsh + Starship
 - Modern shell with Oh My Zsh
-- Powerlevel10k theme
+- **Starship prompt** - Fast, customizable, cross-shell prompt written in Rust
 - Useful plugins:
   - zsh-autosuggestions
   - zsh-syntax-highlighting
@@ -68,14 +68,22 @@ make install
   - Nerd Fonts (FiraCode, Hack, Meslo, JetBrains Mono, Maple Mono)
 
 ### 5. Modern CLI Tools
-- `gh` - GitHub CLI
-- `fzf` - Fuzzy finder
-- `bat` - Enhanced cat
-- `eza` - Modern ls
-- `ripgrep` - Fast search
-- `fd` - Enhanced find
-- `tldr` - Simplified documentation
-- `htop` - System monitor
+- **Core Tools**:
+  - `gh` - GitHub CLI
+  - `fzf` - Fuzzy finder
+  - `bat` - Enhanced cat with syntax highlighting
+  - `eza` - Modern ls replacement
+  - `ripgrep` - Fast search tool
+  - `fd` - Enhanced find
+  - `tldr` - Simplified documentation
+  - `htop` - System monitor
+- **Productivity**:
+  - `zoxide` - Smart cd that learns your habits
+  - `atuin` - Enhanced shell history
+  - `lazygit` - Terminal UI for git
+  - `gping` - Ping with a graph
+  - `starship` - Cross-shell prompt
+  - `neovim` - Modern vim-based editor
 
 ### 6. macOS Configurations
 - **Keyboard**: Maximum speed, no autocorrect
@@ -87,8 +95,10 @@ make install
 ### 7. Dotfiles
 - Complete `.zshrc` with aliases and functions
 - `.gitconfig` with aliases and optimized configuration
+- `.gitignore_global` - Global Git ignore patterns
+- `starship.toml` - Starship prompt configuration
 - Basic SSH config
-- Directory structure (~/Developer, ~/Projects)
+- Directory structure (~/Developer, ~/Projects, ~/.config)
 
 ## Quick Start
 
@@ -125,8 +135,8 @@ Select specific components from a menu:
 **Menu options:**
 1. Install ALL (complete installation)
 2. Homebrew and basic tools
-3. Zsh and Powerlevel10k
-4. Programming languages (Node, Python, Go)
+3. Zsh and Starship
+4. Programming languages (Node, Python)
 5. Applications and fonts
 6. macOS configuration
 7. Dotfiles
@@ -304,10 +314,17 @@ git config --global user.name "Your Name"
 git config --global user.email "your@email.com"
 ```
 
-### 2. Configure Powerlevel10k (Terminal Theme)
+### 2. Customize Starship Prompt (Optional)
+
+Starship is already configured with a custom theme. To customize further:
 
 ```bash
-p10k configure
+# Edit Starship config
+nano ~/.config/starship.toml
+
+# Or use a preset
+starship preset nerd-font-symbols -o ~/.config/starship.toml
+starship preset pastel-powerline -o ~/.config/starship.toml
 ```
 
 ### 3. Generate SSH Key
@@ -322,11 +339,17 @@ cat ~/.ssh/id_ed25519.pub | pbcopy
 
 Then add the key to GitHub/GitLab.
 
-### 4. Change Terminal Font
+### 4. Change Terminal Font (Required for Icons)
+
+To see icons in Starship prompt, use a Nerd Font:
 
 1. Open Terminal/iTerm2
 2. Go to Preferences → Profiles → Text
-3. Change font to any Nerd Font (e.g., "MesloLGS Nerd Font")
+3. Change font to any Nerd Font installed:
+   - MesloLGS Nerd Font (recommended for Starship)
+   - FiraCode Nerd Font
+   - Hack Nerd Font
+   - JetBrains Mono Nerd Font
 
 ### 5. Restart Terminal
 
@@ -480,10 +503,14 @@ Feel free to customize this script for your needs. Some ideas:
 
 - [Homebrew](https://brew.sh/)
 - [Oh My Zsh](https://ohmyz.sh/)
-- [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
+- [Starship](https://starship.rs/) - Cross-shell prompt
 - [Nerd Fonts](https://www.nerdfonts.com/)
 - [NVM](https://github.com/nvm-sh/nvm)
 - [Pyenv](https://github.com/pyenv/pyenv)
+- [Zoxide](https://github.com/ajeetdsouza/zoxide) - Smarter cd
+- [Atuin](https://github.com/atuinsh/atuin) - Enhanced shell history
+- [Lazygit](https://github.com/jesseduffield/lazygit) - Terminal UI for git
+- [Neovim](https://neovim.io/) - Hyperextensible Vim-based text editor
 
 ## License
 
