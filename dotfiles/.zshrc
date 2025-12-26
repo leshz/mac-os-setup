@@ -306,19 +306,6 @@ setopt CORRECT
 setopt CORRECT_ALL
 
 # =============================================================================
-# WELCOME MESSAGE
-# =============================================================================
-
-echo "🚀 Zsh loaded successfully!"
-echo ""
-echo "Quick tips:"
-echo "  • Type 'alias' to see all available shortcuts"
-echo "  • Use 'z <directory>' for smart navigation with zoxide"
-echo "  • Use 'lg' to open lazygit in a git repository"
-echo "  • Press ↑ to search history with atuin (if installed)"
-echo ""
-
-# =============================================================================
 # LOCAL CUSTOMIZATIONS
 # =============================================================================
 
