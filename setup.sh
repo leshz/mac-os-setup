@@ -354,12 +354,15 @@ main() {
     echo "  1. Restart your terminal to apply all changes"
     echo "  2. Configure Git with your credentials:"
     echo "     git config --global user.name \"Your Name\""
-    echo "     git config --global user.email 
-    # echo 
-    if confirm "Do you want to restart the terminal now?"; then print_info
-	    "Restarting terminal..." exec $SHELL -l fi
+    echo "     git config --global user.email \"your.email@example.com\""
 
+    if confirm "Do you want to restart the terminal now?"; then
+        print_info "Restarting terminal..."
+        exec $SHELL -l
+    fi
 
-	    print_success "All done! Enjoy your configured Mac." }
+    print_success "All done! Enjoy your configured Mac."
+}
 
-# Execute main program main
+# Execute main program
+main

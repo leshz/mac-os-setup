@@ -178,12 +178,14 @@ alias zshconfig="$EDITOR ~/.zshrc"
 alias zshreload="source ~/.zshrc"
 alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 
-# Navigation
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias ~="cd ~"
-alias -- -="cd -"
+alias zshconfig="code ~/.zshrc"
+alias c="clear"
+alias dev="npm run dev"
+alias npmv="npm --no-git-tag-version version"
+alias ehs="sudo nvim /etc/hosts"
+alias ehr="sudo killall -HUP mDNSResponder"
+alias cin="rm -rf node_modules package-lock.json && npm cache clean --force && npm install"
+
 
 # List files
 if command -v eza &> /dev/null; then
@@ -202,18 +204,6 @@ fi
 if command -v bat &> /dev/null; then
   alias cat="bat"
 fi
-
-# Git aliases
-alias gs="git status"
-alias ga="git add"
-alias gc="git commit -m"
-alias gp="git push"
-alias gl="git pull"
-alias gd="git diff"
-alias gco="git checkout"
-alias gb="git branch"
-alias glog="git log --oneline --decorate --graph"
-alias gundo="git reset --soft HEAD~1"
 
 # Lazygit
 if command -v lazygit &> /dev/null; then
@@ -255,9 +245,6 @@ alias dcd="docker-compose down"
 alias dcr="docker-compose restart"
 alias dcl="docker-compose logs -f"
 
-# OrbStack (si está instalado)
-alias orb="orbstack"
-
 # System
 alias update="brew update && brew upgrade && brew cleanup"
 alias cleanup="brew cleanup && npm cache clean --force && pip cache purge"
@@ -271,9 +258,6 @@ alias weather="curl wttr.in"
 alias ports="netstat -tulanp"
 alias path='echo $PATH | tr ":" "\n"'
 
-# Quick edits
-alias hosts="sudo $EDITOR /etc/hosts"
-
 # Neovim aliases
 if command -v nvim &> /dev/null; then
   alias vim="nvim"
@@ -285,58 +269,6 @@ fi
 # FUNCTIONS
 # =============================================================================
 
-# Create a new directory and enter it
-mkcd() {
-    mkdir -p "$@" && cd "$_";
-}
-
-# Extract various archive formats
-extract() {
-    if [ -f $1 ] ; then
-        case $1 in
-            *.tar.bz2)   tar xjf $1     ;;
-            *.tar.gz)    tar xzf $1     ;;
-            *.bz2)       bunzip2 $1     ;;
-            *.rar)       unrar e $1     ;;
-            *.gz)        gunzip $1      ;;
-            *.tar)       tar xf $1      ;;
-            *.tbz2)      tar xjf $1     ;;
-            *.tgz)       tar xzf $1     ;;
-            *.zip)       unzip $1       ;;
-            *.Z)         uncompress $1  ;;
-            *.7z)        7z x $1        ;;
-            *)           echo "'$1' cannot be extracted via extract()" ;;
-        esac
-    else
-        echo "'$1' is not a valid file"
-    fi
-}
-
-# Git clone and cd into directory
-gcl() {
-    git clone "$1" && cd "$(basename "$1" .git)"
-}
-
-# Quick web search from terminal
-google() {
-    open "https://www.google.com/search?q=$*"
-}
-
-# Create a backup of a file
-backup() {
-    cp "$1"{,.backup-$(date +%Y%m%d-%H%M%S)}
-}
-
-# Find and kill process by name
-killport() {
-    lsof -ti:$1 | xargs kill -9
-}
-
-# Quick server
-serve() {
-    local port="${1:-8000}"
-    open "http://localhost:${port}/" && python -m http.server "$port"
-}
 
 # =============================================================================
 # PATH ADDITIONS

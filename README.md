@@ -84,6 +84,7 @@ make install
   - `gping` - Ping with a graph
   - `starship` - Cross-shell prompt
   - `neovim` - Modern vim-based editor
+  - `lazyvim` - Pre-configured Neovim IDE distribution
 
 ### 6. macOS Configurations
 - **Keyboard**: Maximum speed, no autocorrect
@@ -97,6 +98,7 @@ make install
 - `.gitconfig` with aliases and optimized configuration
 - `.gitignore_global` - Global Git ignore patterns
 - `starship.toml` - Starship prompt configuration
+- **LazyVim** - Pre-configured Neovim distribution with modern IDE features
 - Basic SSH config
 - Directory structure (~/Developer, ~/Projects, ~/.config)
 
@@ -378,7 +380,7 @@ Then add the key to GitHub/GitLab.
 
 ### 4. Change Terminal Font (Required for Icons)
 
-To see icons in Starship prompt, use a Nerd Font:
+To see icons in Starship prompt and LazyVim, use a Nerd Font:
 
 1. Open Terminal/iTerm2
 2. Go to Preferences → Profiles → Text
@@ -388,7 +390,38 @@ To see icons in Starship prompt, use a Nerd Font:
    - Hack Nerd Font
    - JetBrains Mono Nerd Font
 
-### 5. Restart Terminal
+### 5. Start Neovim with LazyVim
+
+LazyVim is automatically installed during the dotfiles setup. To start using it:
+
+```bash
+# First time opening Neovim will install all plugins
+nvim
+
+# LazyVim will automatically:
+# - Install all plugins
+# - Configure LSP servers
+# - Set up syntax highlighting
+# - Configure keybindings
+```
+
+**Useful LazyVim Commands:**
+- `<Space>` - Open which-key menu (shows all available commands)
+- `:Lazy` - Open plugin manager
+- `:Mason` - Install/manage LSP servers, formatters, linters
+- `:LazyExtras` - Enable/disable extra features
+- `<Space>ff` - Find files
+- `<Space>sg` - Search with grep
+- `<Space>e` - Toggle file explorer
+
+**Configuration:**
+- LazyVim config is in `~/.config/nvim/`
+- Customize in `~/.config/nvim/lua/config/`
+- Add plugins in `~/.config/nvim/lua/plugins/`
+
+For more info: [LazyVim Documentation](https://www.lazyvim.org/)
+
+### 6. Restart Terminal
 
 ```bash
 exec $SHELL -l
@@ -548,6 +581,7 @@ Feel free to customize this script for your needs. Some ideas:
 - [Atuin](https://github.com/atuinsh/atuin) - Enhanced shell history
 - [Lazygit](https://github.com/jesseduffield/lazygit) - Terminal UI for git
 - [Neovim](https://neovim.io/) - Hyperextensible Vim-based text editor
+- [LazyVim](https://www.lazyvim.org/) - Pre-configured Neovim IDE distribution
 
 ## License
 

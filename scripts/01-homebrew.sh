@@ -60,8 +60,11 @@ fi
 # Verificar instalación
 brew --version
 
-# Instalar herramientas CLI básicas
-echo -e "\n${BLUE}Instalando herramientas CLI básicas...${NC}"
+# =============================================================================
+# HERRAMIENTAS CLI BÁSICAS
+# =============================================================================
+
+echo -e "\n${BLUE}=== Herramientas CLI Básicas ===${NC}"
 
 # Array de herramientas esenciales
 CLI_TOOLS=(
@@ -82,4 +85,64 @@ for tool in "${CLI_TOOLS[@]}"; do
     fi
 done
 
-echo -e "\n${GREEN}✓ Homebrew configurado completamente${NC}"
+# =============================================================================
+# HERRAMIENTAS CLI MODERNAS
+# =============================================================================
+
+echo -e "\n${BLUE}=== Herramientas CLI Modernas ===${NC}"
+
+CLI_MODERN=(
+    "gh"        # GitHub CLI
+    "fzf"       # Fuzzy finder
+    "bat"       # Cat con syntax highlighting
+    "eza"       # ls moderno (reemplazo de exa)
+    "ripgrep"   # Búsqueda rápida (rg)
+    "fd"        # Find moderno
+    "tldr"      # Documentación simplificada
+    "htop"      # Monitor de sistema
+    "zoxide"    # cd inteligente (aprende tus directorios)
+    "atuin"     # Historial de shell mejorado
+    "lazygit"   # Git UI en terminal
+    "gping"     # Ping con gráfico bonito
+    "starship"
+    "lsd"  # Prompt moderno y rápido
+    "neovim"    # Editor de texto moderno (vim mejorado)
+)
+
+for tool in "${CLI_MODERN[@]}"; do
+    if brew list "$tool" &>/dev/null; then
+        echo -e "${GREEN}✓ $tool ya está instalado${NC}"
+    else
+        echo -e "${BLUE}Instalando $tool...${NC}"
+        brew install "$tool"
+        echo -e "${GREEN}✓ $tool instalado${NC}"
+    fi
+done
+
+# =============================================================================
+# CONFIGURACIONES POST-INSTALACIÓN
+# =============================================================================
+
+# Configurar fzf
+if command -v fzf &> /dev/null; then
+    echo -e "\n${BLUE}Configurando fzf...${NC}"
+    $(brew --prefix)/opt/fzf/install --key-bindings --completion --no-update-rc --no-bash --no-fish
+    echo -e "${GREEN}✓ fzf configurado${NC}"
+fi
+
+# Configurar zoxide
+if command -v zoxide &> /dev/null; then
+    echo -e "${BLUE}✓ zoxide instalado (se configurará en .zshrc)${NC}"
+fi
+
+# Configurar atuin
+if command -v atuin &> /dev/null; then
+    echo -e "${BLUE}✓ atuin instalado (se configurará en .zshrc)${NC}"
+fi
+
+# Configurar starship
+if command -v starship &> /dev/null; then
+    echo -e "${BLUE}✓ starship instalado (se configurará en .zshrc)${NC}"
+fi
+
+echo -e "\n${GREEN}✓ Todas las herramientas CLI instaladas${NC}"

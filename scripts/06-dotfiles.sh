@@ -154,6 +154,7 @@ echo -e "  • ~/.zshrc (Zsh configuration)"
 echo -e "  • ~/.gitconfig (Git configuration)"
 echo -e "  • ~/.gitignore_global (Global Git ignore)"
 echo -e "  • ~/.config/starship.toml (Starship prompt)"
+echo -e "  • ~/.config/nvim (LazyVim configuration)"
 echo -e "  • ~/.ssh/config (SSH configuration)"
 echo -e ""
 echo -e "Directorios creados:"
@@ -163,6 +164,37 @@ echo -e "  • ~/.config"
 echo -e ""
 
 echo -e "${GREEN}✓ Dotfiles configurados${NC}"
+
+# =============================================================================
+# LAZYVIM SETUP
+# =============================================================================
+
+echo -e "\n${BLUE}=== Configurando LazyVim ===${NC}"
+
+# Verificar si Neovim está instalado
+if command -v nvim &> /dev/null; then
+    NVIM_CONFIG_DIR="$HOME/.config/nvim"
+
+    # Hacer backup de la configuración existente de Neovim si existe
+    if [[ -d "$NVIM_CONFIG_DIR" ]]; then
+        NVIM_BACKUP="${NVIM_CONFIG_DIR}.backup.$(date +%Y%m%d_%H%M%S)"
+        echo -e "${YELLOW}Creando backup de Neovim config: $NVIM_BACKUP${NC}"
+        mv "$NVIM_CONFIG_DIR" "$NVIM_BACKUP"
+    fi
+
+    # Clonar LazyVim starter
+    echo -e "${BLUE}Clonando LazyVim starter...${NC}"
+    git clone https://github.com/LazyVim/starter "$NVIM_CONFIG_DIR"
+
+    # Eliminar el directorio .git para que puedas hacer tu propio repo
+    rm -rf "${NVIM_CONFIG_DIR}/.git"
+
+    echo -e "${GREEN}✓ LazyVim instalado${NC}"
+    echo -e "${YELLOW}Nota: LazyVim se configurará completamente la primera vez que ejecutes 'nvim'${NC}"
+    echo -e "${YELLOW}Para abrir Neovim: nvim${NC}"
+else
+    echo -e "${RED}✗ Neovim no está instalado. Instálalo primero con 01-homebrew.sh${NC}"
+fi
 
 # =============================================================================
 # INSTRUCCIONES PARA CREAR REPO DE DOTFILES

@@ -309,12 +309,28 @@ if [[ "$CLEAN_ALL" == "true" ]] || [[ "$option" == "6" ]]; then
             fi
         done
 
+        # Eliminar LazyVim
+        if [[ -d "$HOME/.config/nvim" ]]; then
+            if ask_confirmation "¿Eliminar configuración de LazyVim (~/.config/nvim)?"; then
+                echo -e "${BLUE}Eliminando LazyVim...${NC}"
+                rm -rf "$HOME/.config/nvim"
+
+                # Eliminar también cache de Neovim
+                rm -rf "$HOME/.local/share/nvim"
+                rm -rf "$HOME/.local/state/nvim"
+                rm -rf "$HOME/.cache/nvim"
+
+                echo -e "${GREEN}✓ LazyVim eliminado${NC}"
+            fi
+        fi
+
         # Eliminar backups
         echo -e "${BLUE}Eliminando backups...${NC}"
         rm -f "$HOME/.zshrc.backup"*
         rm -f "$HOME/.gitconfig.backup"*
         rm -f "$HOME/.gitignore_global.backup"*
         rm -f "$HOME/.config/starship.toml.backup"*
+        rm -rf "$HOME/.config/nvim.backup"*
         echo -e "${GREEN}✓ Backups eliminados${NC}"
 
         # Eliminar SSH config (opcional)
