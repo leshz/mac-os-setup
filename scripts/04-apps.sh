@@ -24,11 +24,11 @@ echo -e "\n${BLUE}=== Aplicaciones GUI ===${NC}"
 # Array de aplicaciones
 APPS=(
     "visual-studio-code"    # VSCode
-    "cursor"                # Cursor Editor
     "orbstack"              # OrbStack (Docker/Linux alternative)
     "appcleaner"            # AppCleaner
     "bruno"                 # Bruno API Client
-    "claude-code"           # Claude Code CLI
+    "claude-code",          # Claude Code CLI
+    "opencode"              # OpenCode Editor
 )
 
 for app in "${APPS[@]}"; do

@@ -93,13 +93,11 @@ fi
 echo -e "\n${BLUE}Creando estructura de directorios...${NC}"
 
 # Directorios comunes de desarrollo
-mkdir -p "$HOME/Developer"
-mkdir -p "$HOME/Projects"
+mkdir -p "$HOME/Develop"
 mkdir -p "$HOME/.config"
 
 echo -e "${GREEN}✓ Directorios creados:${NC}"
-echo -e "  • ~/Developer"
-echo -e "  • ~/Projects"
+echo -e "  • ~/Develop"
 echo -e "  • ~/.config"
 
 # =============================================================================

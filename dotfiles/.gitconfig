@@ -150,7 +150,7 @@
 
 [pull]
     # Usar rebase por defecto en pull
-    rebase = true
+    rebase = false
 
 [fetch]
     # Limpiar referencias remotas automáticamente
@@ -188,7 +188,7 @@
 
 [branch]
     # Al crear un branch, automáticamente configurar upstream
-    autoSetupMerge = always
+    autoSetupMerge = true
 
 [status]
     # Mostrar archivos individuales en directorios untracked
