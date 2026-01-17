@@ -20,12 +20,6 @@ ZSH_THEME=""
 plugins=(
     # Git
     git
-    github
-
-    # Node.js / JavaScript
-    node
-    npm
-    yarn
 
     # Python
     python
@@ -39,6 +33,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     zsh-completions
+    zsh-interactive-cd
 
     # Herramientas
     fzf
@@ -56,6 +51,8 @@ plugins=(
 
 # Cargar Oh My Zsh
 source $ZSH/oh-my-zsh.sh
+
+ZSH_TMUX_ITERM2=true
 
 # =============================================================================
 # USER CONFIGURATION
@@ -178,12 +175,14 @@ alias zshconfig="$EDITOR ~/.zshrc"
 alias zshreload="source ~/.zshrc"
 alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 
-alias zshconfig="code ~/.zshrc"
-alias c="clear"
+
+alias c="clear -x"
 alias dev="npm run dev"
 alias npmv="npm --no-git-tag-version version"
+# Edit host server - reload 
 alias ehs="sudo nvim /etc/hosts"
 alias ehr="sudo killall -HUP mDNSResponder"
+# Clear install npm
 alias cin="rm -rf node_modules package-lock.json && npm cache clean --force && npm install"
 
 
@@ -226,24 +225,6 @@ alias py3="python3"
 alias pip="pip3"
 alias venv="python -m venv"
 alias activate="source venv/bin/activate"
-
-# Docker
-alias dps="docker ps"
-alias dpa="docker ps -a"
-alias di="docker images"
-alias dex="docker exec -it"
-alias dstop="docker stop"
-alias drm="docker rm"
-alias drmi="docker rmi"
-alias dprune="docker system prune -a"
-
-# Docker Compose
-alias dc="docker-compose"
-alias dcu="docker-compose up"
-alias dcud="docker-compose up -d"
-alias dcd="docker-compose down"
-alias dcr="docker-compose restart"
-alias dcl="docker-compose logs -f"
 
 # System
 alias update="brew update && brew upgrade && brew cleanup"
@@ -308,6 +289,8 @@ setopt CORRECT_ALL
 # =============================================================================
 # LOCAL CUSTOMIZATIONS
 # =============================================================================
+
+export HOMEBREW_NO_ENV_HINTS=1
 
 # Source local zshrc if exists (for machine-specific configs)
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
