@@ -100,12 +100,14 @@ CLI_MODERN=(
     "fd"        # Find moderno
     "tldr"      # Documentación simplificada
     "htop"      # Monitor de sistema
+    "btop"      # Monitor de sistema
     "zoxide"    # cd inteligente (aprende tus directorios)
     "atuin"     # Historial de shell mejorado
     "lazygit"   # Git UI en terminal
     "gping"     # Ping con gráfico bonito
-    "starship"
-    "lsd"  # Prompt moderno y rápido
+    "starship"  # Prompt de shell moderno
+    "tmux"      # Multiplexor de terminal
+    "lsd"       # Prompt moderno y rápido
     "neovim"    # Editor de texto moderno (vim mejorado)
 )
 

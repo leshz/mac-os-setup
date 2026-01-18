@@ -79,12 +79,14 @@ make install
   - `fd` - Enhanced find
   - `tldr` - Simplified documentation
   - `htop` - System monitor
+  - `btop` - Advanced system monitor with beautiful UI
 - **Productivity**:
   - `zoxide` - Smart cd that learns your habits
   - `atuin` - Enhanced shell history
   - `lazygit` - Terminal UI for git
   - `gping` - Ping with a graph
   - `starship` - Cross-shell prompt
+  - `tmux` - Terminal multiplexer
   - `neovim` - Modern vim-based editor
   - `lazyvim` - Pre-configured Neovim IDE distribution
 
@@ -646,6 +648,8 @@ Feel free to customize this script for your needs. Some ideas:
 - [LazyVim](https://www.lazyvim.org/) - Pre-configured Neovim IDE distribution
 - [eza](https://github.com/eza-community/eza) - Modern ls replacement
 - [lsd](https://github.com/lsd-rs/lsd) - LSDeluxe, another modern ls
+- [btop](https://github.com/aristocratos/btop) - Resource monitor
+- [tmux](https://github.com/tmux/tmux) - Terminal multiplexer
 - [iTerm2](https://iterm2.com/) - Terminal emulator for macOS
 
 ## License
