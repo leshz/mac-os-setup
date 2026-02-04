@@ -246,6 +246,9 @@ if command -v nvim &> /dev/null; then
   alias v="nvim"
 fi
 
+# Claude Code CLI
+alias cad='claude --allow-dangerously-skip-permissions'
+
 # =============================================================================
 # FUNCTIONS
 # =============================================================================
