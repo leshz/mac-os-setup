@@ -93,6 +93,7 @@ echo -e "\n${BLUE}=== Herramientas CLI Modernas ===${NC}"
 
 CLI_MODERN=(
     "gh"        # GitHub CLI
+    "glow"      # Renderizador de Markdown en la terminal
     "fzf"       # Fuzzy finder
     "bat"       # Cat con syntax highlighting
     "eza"       # ls moderno (reemplazo de exa)
