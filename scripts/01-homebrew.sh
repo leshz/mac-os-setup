@@ -98,6 +98,7 @@ CLI_MODERN=(
     "bat"       # Cat con syntax highlighting
     "eza"       # ls moderno (reemplazo de exa)
     "ripgrep"   # Búsqueda rápida (rg)
+    "rtk"       # CLI toolkit
     "fd"        # Find moderno
     "tldr"      # Documentación simplificada
     "htop"      # Monitor de sistema
