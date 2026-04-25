@@ -86,6 +86,20 @@ else
     echo -e "${YELLOW}⚠ starship.toml no encontrado en dotfiles${NC}"
 fi
 
+# ghostty/config
+if [[ -f "${DOTFILES_DIR}/ghostty/config" ]]; then
+    mkdir -p "$HOME/.config/ghostty"
+
+    if [[ ! -f "$HOME/.config/ghostty/config" ]]; then
+        cp "${DOTFILES_DIR}/ghostty/config" "$HOME/.config/ghostty/config"
+        echo -e "${GREEN}✓ ghostty/config copiado${NC}"
+    else
+        echo -e "${GREEN}✓ ghostty/config ya existe, no se sobreescribe${NC}"
+    fi
+else
+    echo -e "${YELLOW}⚠ ghostty/config no encontrado en dotfiles${NC}"
+fi
+
 # =============================================================================
 # CREAR ESTRUCTURA DE DIRECTORIOS
 # =============================================================================
@@ -152,6 +166,7 @@ echo -e "  • ~/.zshrc (Zsh configuration)"
 echo -e "  • ~/.gitconfig (Git configuration)"
 echo -e "  • ~/.gitignore_global (Global Git ignore)"
 echo -e "  • ~/.config/starship.toml (Starship prompt)"
+echo -e "  • ~/.config/ghostty/config (Ghostty terminal)"
 echo -e "  • ~/.config/nvim (LazyVim configuration)"
 echo -e "  • ~/.ssh/config (SSH configuration)"
 echo -e ""

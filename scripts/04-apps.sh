@@ -29,6 +29,7 @@ APPS=(
     "bruno"                 # Bruno API Client
     "claude-code",          # Claude Code CLI
     "opencode"              # OpenCode Editor
+    "ghostty"               # Ghostty terminal emulator
 )
 
 for app in "${APPS[@]}"; do
@@ -80,6 +81,9 @@ echo -e "  • Claude Code CLI"
 echo -e ""
 echo -e "Contenedores:"
 echo -e "  • OrbStack"
+echo -e ""
+echo -e "Terminales:"
+echo -e "  • Ghostty"
 echo -e ""
 echo -e "Utilidades:"
 echo -e "  • AppCleaner"
