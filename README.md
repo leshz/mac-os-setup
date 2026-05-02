@@ -102,9 +102,6 @@ make install
 - `.gitconfig` with aliases and optimized configuration
 - `.gitignore_global` - Global Git ignore patterns
 - `starship.toml` - Starship prompt configuration
-- **iTerm2 Configuration**:
-  - `Profiles.json` - Custom iTerm2 profiles (ZSH + Hotkey Window)
-  - `keys.itermkeymap` - Custom keyboard mappings
 - **LazyVim** - Pre-configured Neovim distribution with modern IDE features
 - Basic SSH config
 - Directory structure (~/Develop, ~/.config)
@@ -311,8 +308,7 @@ setup-script/
     ├── .gitconfig         # Git configuration
     ├── .gitignore_global  # Global Git ignore
     ├── starship.toml      # Starship prompt config
-    ├── Profiles.json      # iTerm2 profiles
-    └── keys.itermkeymap   # iTerm2 keyboard mappings
+    └── ghostty/           # Ghostty terminal config and shaders
 ```
 
 ## Customization
@@ -401,29 +397,14 @@ Then add the key to GitHub/GitLab.
 
 To see icons in Starship prompt and LazyVim, use a Nerd Font:
 
-1. Open Terminal/iTerm2
-2. Go to Preferences → Profiles → Text
-3. Change font to any Nerd Font installed:
-   - MesloLGM DZ Nerd Font (recommended, used in included profiles)
+1. Open Ghostty → Settings
+2. Set `font-family` to any Nerd Font installed:
+   - MesloLGM DZ Nerd Font (recommended)
    - FiraCode Nerd Font
    - Hack Nerd Font
    - JetBrains Mono Nerd Font
 
-### 5. Import iTerm2 Profiles (Optional)
-
-Custom iTerm2 profiles are included in `dotfiles/`:
-
-1. Open iTerm2 → Preferences → Profiles
-2. Click the gear icon → Import JSON Profiles
-3. Select `dotfiles/Profiles.json`
-4. For keyboard mappings: Preferences → Keys → Key Bindings → Import
-5. Select `dotfiles/keys.itermkeymap`
-
-**Included profiles:**
-- **ZSH**: Main profile with custom colors and status bar
-- **Hotkey Window**: Drop-down terminal (Ctrl+A to toggle)
-
-### 6. Start Neovim with LazyVim
+### 5. Start Neovim with LazyVim
 
 LazyVim is automatically installed during the dotfiles setup. To start using it:
 
@@ -631,7 +612,6 @@ Feel free to customize this script for your needs. Some ideas:
 - Add more macOS configurations
 - Add VSCode extensions sync
 - Add more advanced SSH/GPG configuration
-- Add iTerm2 shell integration scripts
 
 ## Resources
 
@@ -650,7 +630,7 @@ Feel free to customize this script for your needs. Some ideas:
 - [lsd](https://github.com/lsd-rs/lsd) - LSDeluxe, another modern ls
 - [btop](https://github.com/aristocratos/btop) - Resource monitor
 - [tmux](https://github.com/tmux/tmux) - Terminal multiplexer
-- [iTerm2](https://iterm2.com/) - Terminal emulator for macOS
+- [Ghostty](https://ghostty.org/) - Fast, feature-rich terminal emulator
 
 ## License
 
