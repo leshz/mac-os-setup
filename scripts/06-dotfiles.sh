@@ -100,6 +100,51 @@ else
     echo -e "${YELLOW}⚠ ghostty/config no encontrado en dotfiles${NC}"
 fi
 
+# ghostty/shaders
+if [[ -d "${DOTFILES_DIR}/ghostty/shaders" ]]; then
+    mkdir -p "$HOME/.config/ghostty/shaders"
+    cp -r "${DOTFILES_DIR}/ghostty/shaders/." "$HOME/.config/ghostty/shaders/"
+    echo -e "${GREEN}✓ ghostty/shaders copiados${NC}"
+else
+    echo -e "${YELLOW}⚠ ghostty/shaders no encontrado en dotfiles${NC}"
+fi
+
+# ghostty/themes - descargar desde iTerm2-Color-Schemes
+echo -e "\n${BLUE}Configurando temas de Ghostty...${NC}"
+
+GHOSTTY_THEMES_DIR="$HOME/.config/ghostty/themes"
+EXISTING_THEMES=$(ls "$GHOSTTY_THEMES_DIR" 2>/dev/null | wc -l | tr -d ' ')
+
+if [[ "$EXISTING_THEMES" -gt 10 ]]; then
+    echo -e "${GREEN}✓ Temas de Ghostty ya instalados ($EXISTING_THEMES temas)${NC}"
+else
+    if command -v git &> /dev/null; then
+        echo -e "${BLUE}Descargando temas de ghostty desde iterm2colorschemes.com...${NC}"
+        TEMP_DIR=$(mktemp -d)
+
+        git clone --depth=1 --filter=blob:none --sparse \
+            https://github.com/mbadolato/iTerm2-Color-Schemes.git \
+            "$TEMP_DIR/iterm2-schemes" 2>/dev/null
+
+        cd "$TEMP_DIR/iterm2-schemes"
+        git sparse-checkout set ghostty 2>/dev/null
+        cd - > /dev/null
+
+        if [[ -d "$TEMP_DIR/iterm2-schemes/ghostty" ]]; then
+            mkdir -p "$GHOSTTY_THEMES_DIR"
+            cp -r "$TEMP_DIR/iterm2-schemes/ghostty/." "$GHOSTTY_THEMES_DIR/"
+            THEME_COUNT=$(ls "$GHOSTTY_THEMES_DIR" | wc -l | tr -d ' ')
+            echo -e "${GREEN}✓ $THEME_COUNT temas de Ghostty instalados${NC}"
+        else
+            echo -e "${YELLOW}⚠ No se pudieron descargar los temas de Ghostty${NC}"
+        fi
+
+        rm -rf "$TEMP_DIR"
+    else
+        echo -e "${YELLOW}⚠ Git no disponible, no se pueden descargar temas${NC}"
+    fi
+fi
+
 # =============================================================================
 # CREAR ESTRUCTURA DE DIRECTORIOS
 # =============================================================================
