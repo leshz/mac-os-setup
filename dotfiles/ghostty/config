@@ -10,7 +10,7 @@ keybind = cmd+0=toggle_quick_terminal
 
 # Theme
 
-theme = "Emerald Synth"
+theme = "Sea Shells"
 font-size = 18
 font-family = "Hack Nerd Font"
 background-opacity = 0.8
@@ -19,8 +19,6 @@ background-blur-radius = 200
 
 # Icon
 
-macos-icon = holographic
-macos-icon-frame = chrome
 
 # Window
 
@@ -29,10 +27,16 @@ adw-toolbar-style = "flat"
 # Custom
 
 term = "xterm-256color"
-shell-integration-features = no-cursor
+#shell-integration-features = no-cursor
+window-save-state = always
+copy-on-select = "clipboard"
+clipboard-trim-trailing-spaces = true
+shell-integration = detect
+mouse-shift-capture = false
+
 
 # Animations
-custom-shader = shaders/cursor_sweep.glsl
-custom-shader = shaders/bloom.glsl
+custom-shader = shaders/cursor_warp.glsl
+# custom-shader = shaders/bloom.glsl
 # custom-shader-animation = always
 gtk-quick-terminal-layer = overlay
