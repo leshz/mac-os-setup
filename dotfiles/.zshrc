@@ -184,7 +184,9 @@ alias ehs="sudo nvim /etc/hosts"
 alias ehr="sudo killall -HUP mDNSResponder"
 # Clear install npm
 alias cin="rm -rf node_modules package-lock.json && npm cache clean --force && npm install"
-
+alias update="brew update && brew upgrade && brew cleanup"
+alias m="music"
+alias x="exit"
 
 # List files
 if command -v eza &> /dev/null; then
