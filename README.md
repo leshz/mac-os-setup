@@ -91,11 +91,7 @@ make install
   - `lazyvim` - Pre-configured Neovim IDE distribution
 
 ### 6. macOS Configurations
-- **Keyboard**: Maximum speed, no autocorrect
-- **Trackpad**: Tap to click, maximum speed
-- **Dock**: Auto-hide, fast animations
-- **Finder**: Show extensions, hidden files, path bar
-- **Screenshots**: Organized folder, PNG format
+- **Screenshots**: Organized folder (`~/Desktop/Screenshots`), PNG format, no shadow
 
 ### 7. Dotfiles
 - Complete `.zshrc` with aliases and functions
@@ -103,7 +99,7 @@ make install
 - `.gitignore_global` - Global Git ignore patterns
 - `starship.toml` - Starship prompt configuration
 - **LazyVim** - Pre-configured Neovim distribution with modern IDE features
-- Basic SSH config
+- SSH config for GitHub (**optional** — prompted during setup)
 - Directory structure (~/Develop, ~/.config)
 
 ## Quick Start
@@ -341,7 +337,7 @@ CLI_TOOLS=(
 
 ### Modify macOS Settings
 
-Edit `scripts/05-macos.sh` to adjust system settings.
+`scripts/05-macos.sh` only configures screenshot organization. To add system preferences, edit this file directly.
 
 ### Customize Dotfiles
 
