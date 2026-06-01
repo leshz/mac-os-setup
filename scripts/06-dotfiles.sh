@@ -73,6 +73,25 @@ else
     echo -e "${YELLOW}⚠ .gitignore_global no encontrado en dotfiles${NC}"
 fi
 
+# pick-editor (interactive editor selector used as $EDITOR/$VISUAL)
+if [[ -f "${DOTFILES_DIR}/bin/pick-editor" ]]; then
+    mkdir -p "$HOME/.local/bin"
+    cp "${DOTFILES_DIR}/bin/pick-editor" "$HOME/.local/bin/pick-editor"
+    chmod +x "$HOME/.local/bin/pick-editor"
+    echo -e "${GREEN}✓ pick-editor instalado en ~/.local/bin/${NC}"
+else
+    echo -e "${YELLOW}⚠ bin/pick-editor no encontrado en dotfiles${NC}"
+fi
+
+# leaf (terminal Markdown previewer)
+if command -v leaf &> /dev/null; then
+    echo -e "${YELLOW}⚠ leaf ya está instalado, omitiendo${NC}"
+else
+    echo -e "Instalando leaf (Markdown previewer)..."
+    curl -fsSL https://raw.githubusercontent.com/RivoLink/leaf/main/scripts/install.sh | sh
+    echo -e "${GREEN}✓ leaf instalado en ~/.local/bin/${NC}"
+fi
+
 # starship.toml
 if [[ -f "${DOTFILES_DIR}/starship.toml" ]]; then
     # Crear directorio .config si no existe
@@ -219,6 +238,8 @@ echo -e "  • ~/.gitignore_global (Global Git ignore)"
 echo -e "  • ~/.config/starship.toml (Starship prompt)"
 echo -e "  • ~/.config/ghostty/config (Ghostty terminal)"
 echo -e "  • ~/.config/nvim (LazyVim configuration)"
+echo -e "  • ~/.local/bin/pick-editor (Interactive editor selector)
+  • ~/.local/bin/leaf (Terminal Markdown previewer)"
 echo -e "  • ~/.ssh/config (SSH configuration)"
 echo -e ""
 echo -e "Directorios creados:"

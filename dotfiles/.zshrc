@@ -58,15 +58,9 @@ ZSH_TMUX_ITERM2=true
 # USER CONFIGURATION
 # =============================================================================
 
-# Preferred editor
-# Si Neovim está instalado, usarlo como editor por defecto
-if command -v nvim &> /dev/null; then
-  export EDITOR='nvim'
-  export VISUAL='nvim'
-else
-  export EDITOR='nano'
-  export VISUAL='code'
-fi
+# Preferred editor — interactive picker (nvim / code / leaf) via fzf
+export EDITOR="$HOME/.local/bin/pick-editor"
+export VISUAL="$HOME/.local/bin/pick-editor"
 
 # =============================================================================
 # HOMEBREW

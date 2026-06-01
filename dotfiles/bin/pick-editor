@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# pick-editor — interactive editor selector via fzf
+# Used as $EDITOR / $VISUAL so tools can prompt which editor to open a file with.
+FILE="$1"
+CHOICE=$(printf "nvim\ncode\nleaf" | fzf --prompt="Editor: " --height=5 --reverse --no-info)
+case "$CHOICE" in
+  nvim) nvim "$FILE" ;;
+  code) code --wait "$FILE" ;;
+  leaf) leaf "$FILE" ;;
+esac

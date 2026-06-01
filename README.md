@@ -99,6 +99,8 @@ make install
 - `.gitignore_global` - Global Git ignore patterns
 - `starship.toml` - Starship prompt configuration
 - **LazyVim** - Pre-configured Neovim distribution with modern IDE features
+- **pick-editor** - Interactive editor picker (`nvim` / `code` / `leaf`) via fzf, set as `$EDITOR`
+- **leaf** - Terminal Markdown previewer (installed to `~/.local/bin/leaf`)
 - SSH config for GitHub (**optional** — prompted during setup)
 - Directory structure (~/Develop, ~/.config)
 
@@ -304,7 +306,9 @@ setup-script/
     ├── .gitconfig         # Git configuration
     ├── .gitignore_global  # Global Git ignore
     ├── starship.toml      # Starship prompt config
-    └── ghostty/           # Ghostty terminal config and shaders
+    ├── ghostty/           # Ghostty terminal config and shaders
+    └── bin/
+        └── pick-editor    # Interactive editor picker via fzf
 ```
 
 ## Customization
@@ -627,6 +631,7 @@ Feel free to customize this script for your needs. Some ideas:
 - [btop](https://github.com/aristocratos/btop) - Resource monitor
 - [tmux](https://github.com/tmux/tmux) - Terminal multiplexer
 - [Ghostty](https://ghostty.org/) - Fast, feature-rich terminal emulator
+- [leaf](https://github.com/RivoLink/leaf) - Terminal Markdown previewer with TUI
 
 ## License
 
