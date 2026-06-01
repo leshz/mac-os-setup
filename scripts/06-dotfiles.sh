@@ -160,18 +160,21 @@ echo -e "  • ~/Develop"
 echo -e "  • ~/.config"
 
 # =============================================================================
-# CONFIGURAR SSH
+# CONFIGURAR SSH (OPCIONAL)
 # =============================================================================
 
-echo -e "\n${BLUE}Configurando SSH...${NC}"
+echo -e ""
+read -r -p "  ¿Deseas configurar SSH para GitHub? (y/n): " ssh_choice
+if [[ "$ssh_choice" =~ ^[Yy]$ ]]; then
+    echo -e "\n${BLUE}Configurando SSH...${NC}"
 
-SSH_DIR="$HOME/.ssh"
-mkdir -p "$SSH_DIR"
-chmod 700 "$SSH_DIR"
+    SSH_DIR="$HOME/.ssh"
+    mkdir -p "$SSH_DIR"
+    chmod 700 "$SSH_DIR"
 
-# Crear config de SSH si no existe
-if [[ ! -f "$SSH_DIR/config" ]]; then
-    cat > "$SSH_DIR/config" << 'EOF'
+    # Crear config de SSH si no existe
+    if [[ ! -f "$SSH_DIR/config" ]]; then
+        cat > "$SSH_DIR/config" << 'EOF'
 # SSH Config
 # Add your SSH configurations here
 
@@ -190,15 +193,18 @@ Host *
   IdentitiesOnly yes
 EOF
 
-    chmod 600 "$SSH_DIR/config"
-    echo -e "${GREEN}✓ SSH config creado${NC}"
-else
-    echo -e "${GREEN}✓ SSH config ya existe${NC}"
-fi
+        chmod 600 "$SSH_DIR/config"
+        echo -e "${GREEN}✓ SSH config creado${NC}"
+    else
+        echo -e "${GREEN}✓ SSH config ya existe${NC}"
+    fi
 
-echo -e "\n${YELLOW}Para generar una nueva SSH key:${NC}"
-echo -e "  ssh-keygen -t ed25519 -C \"tu@email.com\""
-echo -e "  ssh-add --apple-use-keychain ~/.ssh/id_ed25519"
+    echo -e "\n${YELLOW}Para generar una nueva SSH key:${NC}"
+    echo -e "  ssh-keygen -t ed25519 -C \"tu@email.com\""
+    echo -e "  ssh-add --apple-use-keychain ~/.ssh/id_ed25519"
+else
+    echo -e "${BLUE}  SSH omitido.${NC}"
+fi
 
 # =============================================================================
 # RESUMEN
