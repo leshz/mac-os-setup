@@ -111,6 +111,7 @@ CLI_MODERN=(
     "tmux"      # Multiplexor de terminal
     "lsd"       # Prompt moderno y rápido
     "neovim"    # Editor de texto moderno (vim mejorado)
+    "mole"      # Herramienta CLI
 )
 
 for tool in "${CLI_MODERN[@]}"; do
