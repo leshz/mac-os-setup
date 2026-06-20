@@ -2,7 +2,7 @@
 
 # =============================================================================
 # LANGUAGES SETUP
-# Instala Node.js (nvm) y Python (pyenv)
+# Instala Node.js (fnm) y Python (pyenv)
 # =============================================================================
 
 set -e
@@ -17,38 +17,30 @@ NC='\033[0m'
 echo -e "${BLUE}Configurando lenguajes de programación...${NC}"
 
 # =============================================================================
-# NODE.JS (NVM)
+# NODE.JS (FNM)
 # =============================================================================
 
-echo -e "\n${BLUE}=== Node.js con NVM ===${NC}"
+echo -e "\n${BLUE}=== Node.js con FNM ===${NC}"
 
-if [[ -d "$HOME/.nvm" ]]; then
-    echo -e "${GREEN}✓ NVM ya está instalado${NC}"
+if command -v fnm &> /dev/null; then
+    echo -e "${GREEN}✓ FNM ya está instalado${NC}"
 else
-    echo -e "${BLUE}Instalando NVM...${NC}"
-
-    # Instalar NVM
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-
-    # Cargar NVM
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-    echo -e "${GREEN}✓ NVM instalado${NC}"
+    echo -e "${BLUE}Instalando FNM...${NC}"
+    brew install fnm
+    echo -e "${GREEN}✓ FNM instalado${NC}"
 fi
 
-# Cargar NVM si no está cargado
-if ! command -v nvm &> /dev/null; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# Cargar FNM en este shell (necesario para usar fnm en el resto del script)
+if command -v fnm &> /dev/null; then
+    eval "$(fnm env --use-on-cd --shell zsh)"
 fi
 
 # Instalar Node.js LTS
-if command -v nvm &> /dev/null; then
+if command -v fnm &> /dev/null; then
     echo -e "${BLUE}Instalando Node.js LTS...${NC}"
-    nvm install --lts
-    nvm use --lts
-    nvm alias default 'lts/*'
+    fnm install --lts
+    fnm default lts-latest
+    fnm use lts-latest
 
     echo -e "${GREEN}✓ Node.js instalado: $(node --version)${NC}"
     echo -e "${GREEN}✓ npm instalado: $(npm --version)${NC}"
@@ -60,7 +52,7 @@ if command -v nvm &> /dev/null; then
     echo -e "${GREEN}✓ pnpm instalado: $(pnpm --version)${NC}"
     echo -e "${GREEN}✓ yarn instalado: $(yarn --version)${NC}"
 else
-    echo -e "${RED}✗ Error: NVM no se pudo cargar correctamente${NC}"
+    echo -e "${RED}✗ Error: FNM no se pudo cargar correctamente${NC}"
 fi
 
 # =============================================================================

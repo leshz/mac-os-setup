@@ -50,7 +50,7 @@ make install
   - zsh-completions
 
 ### 3. Programming Languages
-- **Node.js**: nvm + LTS version + pnpm + yarn
+- **Node.js**: fnm + LTS version + pnpm + yarn
 - **Python**: pyenv + Python 3.12/3.11 + pipenv + poetry
 
 ### 4. Applications
@@ -265,7 +265,7 @@ The cleanup script offers an interactive menu to selectively remove:
 1. **GUI Applications** - VSCode, Cursor, OrbStack, etc.
 2. **CLI Tools** - gh, fzf, bat, eza, ripgrep, etc.
 3. **Nerd Fonts** - All installed Nerd Fonts
-4. **Programming Languages** - Node.js/NVM, Python/Pyenv
+4. **Programming Languages** - Node.js/FNM, Python/Pyenv
 5. **Oh My Zsh** - Including all plugins
 6. **Dotfiles** - .zshrc, .gitconfig, starship.toml, etc.
 7. **macOS Settings** - Restore to system defaults
@@ -545,7 +545,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(/usr/local/bin/brew shellenv)"
 ```
 
-### NVM not working
+### FNM not working
 
 ```bash
 source ~/.zshrc
@@ -619,7 +619,7 @@ Feel free to customize this script for your needs. Some ideas:
 - [Oh My Zsh](https://ohmyz.sh/)
 - [Starship](https://starship.rs/) - Cross-shell prompt
 - [Nerd Fonts](https://www.nerdfonts.com/)
-- [NVM](https://github.com/nvm-sh/nvm)
+- [FNM](https://github.com/Schniz/fnm)
 - [Pyenv](https://github.com/pyenv/pyenv)
 - [Zoxide](https://github.com/ajeetdsouza/zoxide) - Smarter cd
 - [Atuin](https://github.com/atuinsh/atuin) - Enhanced shell history

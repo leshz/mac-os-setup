@@ -31,7 +31,6 @@ plugins=(
 
     # Autocompletado y sugerencias
     zsh-autosuggestions
-    zsh-syntax-highlighting
     zsh-completions
     zsh-interactive-cd
 
@@ -47,7 +46,14 @@ plugins=(
     copypath
     copyfile
     web-search
+
+    # zsh-syntax-highlighting DEBE ser el último plugin del array,
+    # de lo contrario pierde el resaltado de widgets ZLE
+    zsh-syntax-highlighting
 )
+
+# Usar dump cacheado de compinit (sin compaudit en cada arranque)
+ZSH_DISABLE_COMPFIX=true
 
 # Cargar Oh My Zsh
 source $ZSH/oh-my-zsh.sh
@@ -76,45 +82,34 @@ else
 fi
 
 # =============================================================================
-# NVM (NODE VERSION MANAGER)
+# FNM (NODE VERSION MANAGER — Rust, fast)
 # =============================================================================
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Cargar nvm automáticamente
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+if command -v fnm &> /dev/null; then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+fi
 
 # =============================================================================
-# PYENV (PYTHON VERSION MANAGER)
+# PYENV (PYTHON VERSION MANAGER — lazy load)
 # =============================================================================
 
+# `pyenv init` cuesta ~350ms en cada arranque. En vez de eager, se inicializa
+# on-demand: la primera vez que se invoca pyenv/python/python3 se carga el init
+# real (una sola vez por sesión, ~220ms), y el shim se elimina.
+# NOTA: `pip` se omite a propósito de los shims — más abajo hay `alias pip=pip3`
+# y zsh no permite definir una función con el nombre de un alias existente.
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv &> /dev/null || [[ -d "$PYENV_ROOT/bin" ]]; then
+  export PATH="$PYENV_ROOT/bin:$PATH"
 
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+  _pyenv_lazy_init() {
+    unset -f pyenv python python3 2>/dev/null
+    eval "$(command pyenv init -)"
+    eval "$(command pyenv virtualenv-init -)"
+  }
+  pyenv()   { _pyenv_lazy_init; pyenv "$@"; }
+  python()  { _pyenv_lazy_init; python "$@"; }
+  python3() { _pyenv_lazy_init; python3 "$@"; }
 fi
 
 # =============================================================================

@@ -68,7 +68,7 @@ echo -e "\n${BLUE}Selecciona qué deseas desinstalar:${NC}\n"
 echo "1. Aplicaciones GUI (VSCode, Cursor, OrbStack, etc.)"
 echo "2. Herramientas CLI (gh, fzf, bat, eza, ripgrep, etc.)"
 echo "3. Nerd Fonts"
-echo "4. Lenguajes (Node.js/NVM, Python/Pyenv)"
+echo "4. Lenguajes (Node.js/FNM, Python/Pyenv)"
 echo "5. Oh My Zsh y plugins"
 echo "6. Dotfiles y configuraciones"
 echo "7. Restaurar configuraciones de macOS"
@@ -206,21 +206,29 @@ fi
 if [[ "$CLEAN_ALL" == "true" ]] || [[ "$option" == "4" ]]; then
     echo -e "\n${BLUE}=== Desinstalando Lenguajes ===${NC}"
 
-    # Node.js / NVM
-    if [[ -d "$HOME/.nvm" ]]; then
-        if ask_confirmation "¿Desinstalar NVM y todas las versiones de Node.js?"; then
-            echo -e "${BLUE}Desinstalando NVM...${NC}"
-            rm -rf "$HOME/.nvm"
-            echo -e "${GREEN}✓ NVM desinstalado${NC}"
+    # Node.js / FNM
+    if command -v fnm &> /dev/null; then
+        if ask_confirmation "¿Desinstalar FNM y todas las versiones de Node.js?"; then
+            echo -e "${BLUE}Desinstalando FNM...${NC}"
+            brew uninstall fnm --force
+
+            # Eliminar directorio de versiones de fnm
+            if [[ -d "$HOME/.local/state/fnm_multishells" ]]; then
+                rm -rf "$HOME/.local/state/fnm_multishells"
+            fi
+            if [[ -d "$HOME/.fnm" ]]; then
+                rm -rf "$HOME/.fnm"
+            fi
+
+            echo -e "${GREEN}✓ FNM desinstalado${NC}"
 
             # Limpiar del .zshrc
             if [[ -f "$HOME/.zshrc" ]]; then
-                sed -i.backup '/NVM_DIR/d' "$HOME/.zshrc"
-                sed -i.backup '/nvm\.sh/d' "$HOME/.zshrc"
+                sed -i.backup '/fnm env/d' "$HOME/.zshrc"
             fi
         fi
     else
-        echo -e "${YELLOW}⚠ NVM no está instalado${NC}"
+        echo -e "${YELLOW}⚠ FNM no está instalado${NC}"
     fi
 
     # Python / Pyenv
