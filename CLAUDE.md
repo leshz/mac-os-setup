@@ -11,7 +11,7 @@ setup.sh              # Orchestrator — sequential or interactive menu mode
 scripts/
   01-homebrew.sh      # Homebrew + CLI tools
   02-zsh.sh           # Zsh + Oh My Zsh + Starship + plugins
-  03-languages.sh     # Node.js (NVM), Python (pyenv)
+  03-languages.sh     # Node.js (FNM), Python (pyenv)
   04-apps.sh          # GUI apps + Nerd Fonts
   05-macos.sh         # macOS system preferences (screenshots only)
   06-dotfiles.sh      # Dotfiles + optional SSH setup

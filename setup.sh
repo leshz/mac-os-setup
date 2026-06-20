@@ -88,7 +88,7 @@ run_script() {
                 echo -e "${BLUE}  → Would install Oh My Zsh, Powerlevel10k and plugins${NC}"
                 ;;
             "03-languages.sh")
-                echo -e "${BLUE}  → Would install Node.js (nvm), Python (pyenv), Go${NC}"
+                echo -e "${BLUE}  → Would install Node.js (fnm), Python (pyenv), Go${NC}"
                 ;;
             "04-apps.sh")
                 echo -e "${BLUE}  → Would install GUI applications and CLI tools${NC}"
@@ -170,7 +170,7 @@ install_component() {
                 echo -e "${BLUE}  → Would install Oh My Zsh, Powerlevel10k and plugins${NC}"
                 ;;
             "03-languages.sh")
-                echo -e "${BLUE}  → Would install Node.js (nvm), Python (pyenv), Go${NC}"
+                echo -e "${BLUE}  → Would install Node.js (fnm), Python (pyenv), Go${NC}"
                 ;;
             "04-apps.sh")
                 echo -e "${BLUE}  → Would install VSCode, Cursor, Claude Code, Bruno, AppCleaner, Boring Notch${NC}"
@@ -319,7 +319,7 @@ main() {
     print_info "This process will install and configure:"
     echo "  1. Homebrew"
     echo "  2. Zsh + Oh My Zsh"
-    echo "  3. Node.js (nvm) and Python (pyenv)"
+    echo "  3. Node.js (fnm) and Python (pyenv)"
     echo "  4. Applications (VSCode, Cursor, OrbStack, Bruno, AppCleaner, etc.)"
     echo "  5. macOS settings"
     echo "  6. Dotfiles"
