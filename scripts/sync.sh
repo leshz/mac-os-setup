@@ -114,4 +114,3 @@ mkdir -p "$HOME/.cache/mac-os-setup"
 date +%Y-%m-%d > "$HOME/.cache/mac-os-setup/last-check"
 
 echo -e "\n${GREEN}✓ Sincronización completa${NC}"
-echo -e "${YELLOW}Nota: reinicia el shell o corre 'zshreload' para aplicar cambios de .zshrc${NC}"
