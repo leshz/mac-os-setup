@@ -224,6 +224,7 @@ alias activate="source venv/bin/activate"
 alias update="brew update && brew upgrade && brew cleanup"
 alias cleanup="brew cleanup && npm cache clean --force && pip cache purge"
 alias upc="brew reinstall claude-code"
+alias dotsync="$MAC_SETUP_DIR/scripts/sync.sh"
 
 # Network
 alias localip="ipconfig getifaddr en0"
@@ -288,6 +289,32 @@ setopt CORRECT_ALL
 # =============================================================================
 
 export HOMEBREW_NO_ENV_HINTS=1
+
+# =============================================================================
+# MAC-OS-SETUP UPDATE CHECK (daily, non-blocking)
+# =============================================================================
+
+export MAC_SETUP_DIR="$HOME/Develop/Tools/mac-os-setup"
+
+_mac_setup_check_updates() {
+  local marker="$HOME/.cache/mac-os-setup/last-check"
+  local today
+  today=$(date +%Y-%m-%d)
+
+  [[ -d "$MAC_SETUP_DIR/.git" ]] || return
+  mkdir -p "$(dirname "$marker")"
+  [[ -f "$marker" && "$(cat "$marker" 2>/dev/null)" == "$today" ]] && return
+  echo "$today" > "$marker"
+
+  (
+    cd "$MAC_SETUP_DIR" && git fetch --quiet origin main 2>/dev/null
+    behind=$(git rev-list --count HEAD..origin/main 2>/dev/null)
+    if [[ "${behind:-0}" -gt 0 ]]; then
+      echo "󰚰  mac-os-setup: hay $behind commit(s) nuevos en main. Corre: dotsync" >&2
+    fi
+  ) &!
+}
+_mac_setup_check_updates
 
 # Source local zshrc if exists (for machine-specific configs)
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
