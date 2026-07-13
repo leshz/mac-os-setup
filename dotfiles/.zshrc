@@ -31,6 +31,7 @@ plugins=(
 
     # Autocompletado y sugerencias
     zsh-autosuggestions
+    zsh-npm-scripts-autocomplete
     zsh-completions
     zsh-interactive-cd
 
@@ -46,6 +47,7 @@ plugins=(
     copypath
     copyfile
     web-search
+    tmux
 
     # zsh-syntax-highlighting DEBE ser el último plugin del array,
     # de lo contrario pierde el resaltado de widgets ZLE
@@ -57,8 +59,6 @@ ZSH_DISABLE_COMPFIX=true
 
 # Cargar Oh My Zsh
 source $ZSH/oh-my-zsh.sh
-
-ZSH_TMUX_ITERM2=true
 
 # =============================================================================
 # USER CONFIGURATION
@@ -173,9 +173,10 @@ alias ehs="sudo nvim /etc/hosts"
 alias ehr="sudo killall -HUP mDNSResponder"
 # Clear install npm
 alias cin="rm -rf node_modules package-lock.json && npm cache clean --force && npm install"
-alias update="brew update && brew upgrade && brew cleanup"
 alias m="music"
 alias x="exit"
+alias teams="cmux claude-teams"
+
 
 # List files
 if command -v eza &> /dev/null; then
@@ -200,6 +201,8 @@ if command -v lazygit &> /dev/null; then
   alias lg="lazygit"
 fi
 
+export CLAUDE_ENV_FILE="$HOME/.claude/shell-init.sh"
+
 # Node.js / npm
 alias ni="npm install"
 alias nid="npm install --save-dev"
@@ -220,15 +223,18 @@ alias activate="source venv/bin/activate"
 # System
 alias update="brew update && brew upgrade && brew cleanup"
 alias cleanup="brew cleanup && npm cache clean --force && pip cache purge"
+alias upc="brew reinstall claude-code"
 
 # Network
 alias localip="ipconfig getifaddr en0"
 alias publicip="curl ifconfig.me"
+alias gpingg="gping www.google.com"
 
 # Utilities
 alias weather="curl wttr.in"
 alias ports="netstat -tulanp"
 alias path='echo $PATH | tr ":" "\n"'
+alias rw="railway"
 
 # Neovim aliases
 if command -v nvim &> /dev/null; then
@@ -236,9 +242,6 @@ if command -v nvim &> /dev/null; then
   alias vi="nvim"
   alias v="nvim"
 fi
-
-# Claude Code CLI
-alias cad='claude --allow-dangerously-skip-permissions'
 
 # =============================================================================
 # FUNCTIONS
