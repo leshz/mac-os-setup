@@ -6,6 +6,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# mac-os-setup repo location (used by dotsync alias and daily update check)
+export MAC_SETUP_DIR="$HOME/Develop/Tools/mac-os-setup"
+
 # =============================================================================
 # THEME
 # =============================================================================
@@ -293,8 +296,6 @@ export HOMEBREW_NO_ENV_HINTS=1
 # =============================================================================
 # MAC-OS-SETUP UPDATE CHECK (daily, non-blocking)
 # =============================================================================
-
-export MAC_SETUP_DIR="$HOME/Develop/Tools/mac-os-setup"
 
 _mac_setup_check_updates() {
   local marker="$HOME/.cache/mac-os-setup/last-check"
