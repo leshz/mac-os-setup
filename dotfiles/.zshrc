@@ -227,7 +227,7 @@ alias activate="source venv/bin/activate"
 alias update="brew update && brew upgrade && brew cleanup"
 alias cleanup="brew cleanup && npm cache clean --force && pip cache purge"
 alias upc="brew reinstall claude-code"
-alias dotsync="$MAC_SETUP_DIR/scripts/sync.sh"
+alias dotsync="$MAC_SETUP_DIR/scripts/sync.sh && source ~/.zshrc"
 
 # Network
 alias localip="ipconfig getifaddr en0"
