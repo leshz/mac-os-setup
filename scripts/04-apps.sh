@@ -30,6 +30,7 @@ APPS=(
     "claude-code",          # Claude Code CLI
     "opencode"              # OpenCode Editor
     "ghostty"               # Ghostty terminal emulator
+    "cmux"                  # cmux - Ghostty-based terminal for AI coding agents
 )
 
 for app in "${APPS[@]}"; do
@@ -84,6 +85,7 @@ echo -e "  • OrbStack"
 echo -e ""
 echo -e "Terminales:"
 echo -e "  • Ghostty"
+echo -e "  • cmux"
 echo -e ""
 echo -e "Utilidades:"
 echo -e "  • AppCleaner"
