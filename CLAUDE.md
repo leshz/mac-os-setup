@@ -29,6 +29,12 @@ Only configures screenshot organization:
 
 All other system preferences (keyboard, trackpad, dock, finder) were intentionally removed — the user manages those manually.
 
+### Auto-update check + sync (`dotfiles/.zshrc` + `scripts/sync.sh`)
+`.zshrc` runs a once-per-day, non-blocking background check (`_mac_setup_check_updates`) that fetches `origin/main` and warns via stderr if the local clone is behind — no `.zshrc` startup latency added (guarded by a date marker in `~/.cache/mac-os-setup/last-check`, and the git fetch runs in a disowned subshell).
+It only **notifies**; it never pulls or applies changes automatically. The user runs `dotsync` (alias for `scripts/sync.sh`) to actually pull and apply only what changed:
+- `scripts/01-homebrew.sh` / `scripts/04-apps.sh` re-run in full if they changed (safe — idempotent, check `brew list` first).
+- Changed files under `dotfiles/` are copied individually to their home-dir targets (reuses the backup-before-overwrite pattern from `06-dotfiles.sh`), instead of invoking `06-dotfiles.sh` wholesale — that script also runs interactive SSH setup and heavy one-time clones (Ghostty themes, LazyVim) that shouldn't fire on every sync.
+
 ### SSH setup is optional (`06-dotfiles.sh`)
 During the dotfiles step, the script interactively prompts:
 ```
