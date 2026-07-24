@@ -70,6 +70,18 @@ confirm() {
     fi
 }
 
+# Ensure brew is in PATH for this session (fresh installs don't update the
+# parent shell, so child scripts would fail with "brew: command not found")
+ensure_brew_env() {
+    if ! command -v brew &> /dev/null; then
+        if [[ -x /opt/homebrew/bin/brew ]]; then
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+        elif [[ -x /usr/local/bin/brew ]]; then
+            eval "$(/usr/local/bin/brew shellenv)"
+        fi
+    fi
+}
+
 # Function to execute a script with confirmation
 run_script() {
     local script_path="$1"
@@ -106,7 +118,10 @@ run_script() {
     if confirm "Execute $script_name?"; then
         print_info "Executing $script_name..."
 
-        if bash "$script_path" 2>&1 | tee -a "$LOG_FILE"; then
+        # PIPESTATUS[0] captura el código del script, no el de tee (que casi
+        # siempre devuelve 0 y enmascararía cualquier fallo)
+        bash "$script_path" 2>&1 | tee -a "$LOG_FILE"
+        if [[ ${PIPESTATUS[0]} -eq 0 ]]; then
             print_success "$description completed"
             return 0
         else
@@ -184,7 +199,18 @@ install_component() {
                 ;;
         esac
     else
-        bash "${SCRIPTS_DIR}/${script_name}"
+        # `|| status=$?` evita que set -e aborte el menú si el script reporta
+        # instalaciones fallidas; el aviso se muestra y el menú sigue vivo
+        local status=0
+        bash "${SCRIPTS_DIR}/${script_name}" || status=$?
+
+        if [[ "$script_name" == "01-homebrew.sh" ]]; then
+            ensure_brew_env
+        fi
+
+        if [[ $status -ne 0 ]]; then
+            print_warning "$script_name terminó con errores (revisa el resumen de arriba)"
+        fi
     fi
 }
 
@@ -201,6 +227,7 @@ sequential_install() {
 
     # Run all scripts in sequence
     run_script "${SCRIPTS_DIR}/01-homebrew.sh" "Homebrew Installation"
+    ensure_brew_env
     run_script "${SCRIPTS_DIR}/02-zsh.sh" "Zsh Configuration"
     run_script "${SCRIPTS_DIR}/03-languages.sh" "Programming Languages Installation"
     run_script "${SCRIPTS_DIR}/04-apps.sh" "Applications Installation"

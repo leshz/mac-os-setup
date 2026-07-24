@@ -66,6 +66,9 @@ brew --version
 
 echo -e "\n${BLUE}=== Herramientas CLI Básicas ===${NC}"
 
+# Herramientas que fallaron — se reportan al final sin abortar el resto
+FAILED_ITEMS=()
+
 # Array de herramientas esenciales
 CLI_TOOLS=(
     "git"           # Control de versiones
@@ -78,10 +81,11 @@ CLI_TOOLS=(
 for tool in "${CLI_TOOLS[@]}"; do
     if brew list "$tool" &>/dev/null; then
         echo -e "${GREEN}✓ $tool ya está instalado${NC}"
-    else
-        echo -e "${BLUE}Instalando $tool...${NC}"
-        brew install "$tool"
+    elif brew install "$tool"; then
         echo -e "${GREEN}✓ $tool instalado${NC}"
+    else
+        echo -e "${YELLOW}⚠ Falló la instalación de $tool — continuando con la siguiente${NC}"
+        FAILED_ITEMS+=("$tool")
     fi
 done
 
@@ -117,10 +121,11 @@ CLI_MODERN=(
 for tool in "${CLI_MODERN[@]}"; do
     if brew list "$tool" &>/dev/null; then
         echo -e "${GREEN}✓ $tool ya está instalado${NC}"
-    else
-        echo -e "${BLUE}Instalando $tool...${NC}"
-        brew install "$tool"
+    elif brew install "$tool"; then
         echo -e "${GREEN}✓ $tool instalado${NC}"
+    else
+        echo -e "${YELLOW}⚠ Falló la instalación de $tool — continuando con la siguiente${NC}"
+        FAILED_ITEMS+=("$tool")
     fi
 done
 
@@ -148,6 +153,15 @@ fi
 # Configurar starship
 if command -v starship &> /dev/null; then
     echo -e "${BLUE}✓ starship instalado (se configurará en .zshrc)${NC}"
+fi
+
+if [[ ${#FAILED_ITEMS[@]} -gt 0 ]]; then
+    echo -e "\n${YELLOW}⚠ Las siguientes herramientas fallaron y deben instalarse manualmente:${NC}"
+    for item in "${FAILED_ITEMS[@]}"; do
+        echo -e "${YELLOW}  • $item${NC}"
+    done
+    # Salir con error para que setup.sh no reporte éxito con instalaciones faltantes
+    exit 1
 fi
 
 echo -e "\n${GREEN}✓ Todas las herramientas CLI instaladas${NC}"
