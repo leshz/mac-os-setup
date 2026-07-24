@@ -12,7 +12,7 @@
 
 [core]
     # Editor por defecto
-    editor = nano
+    editor = vim
 
     # Ignorar cambios en permisos de archivos
     filemode = false
