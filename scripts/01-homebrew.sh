@@ -160,6 +160,8 @@ if [[ ${#FAILED_ITEMS[@]} -gt 0 ]]; then
     for item in "${FAILED_ITEMS[@]}"; do
         echo -e "${YELLOW}  • $item${NC}"
     done
-else
-    echo -e "\n${GREEN}✓ Todas las herramientas CLI instaladas${NC}"
+    # Salir con error para que setup.sh no reporte éxito con instalaciones faltantes
+    exit 1
 fi
+
+echo -e "\n${GREEN}✓ Todas las herramientas CLI instaladas${NC}"

@@ -130,3 +130,8 @@ echo -e ""
 echo -e "${YELLOW}Instalación manual requerida:${NC}"
 echo -e "  • Boring Notch (Dynamic Island) - No disponible via Homebrew"
 echo -e "    Descarga desde: https://www.boringnotch.com/"
+
+# Salir con error para que setup.sh no reporte éxito con instalaciones faltantes
+if [[ ${#FAILED_ITEMS[@]} -gt 0 ]]; then
+    exit 1
+fi
