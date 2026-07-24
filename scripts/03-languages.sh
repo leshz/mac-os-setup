@@ -14,6 +14,19 @@ BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m'
 
+# Asegurar que brew esté en el PATH (sesiones nuevas tras instalación fresca)
+if ! command -v brew &> /dev/null; then
+    if [[ -x /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -x /usr/local/bin/brew ]]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    else
+        echo -e "${YELLOW}✗ Homebrew no está instalado.${NC}"
+        echo -e "${YELLOW}  Ejecuta primero scripts/01-homebrew.sh o reinicia la terminal.${NC}"
+        exit 1
+    fi
+fi
+
 echo -e "${BLUE}Configurando lenguajes de programación...${NC}"
 
 # =============================================================================

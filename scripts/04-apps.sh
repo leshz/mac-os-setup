@@ -13,6 +13,19 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
+# Asegurar que brew esté en el PATH (sesiones nuevas tras instalación fresca)
+if ! command -v brew &> /dev/null; then
+    if [[ -x /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -x /usr/local/bin/brew ]]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    else
+        echo -e "${YELLOW}✗ Homebrew no está instalado.${NC}"
+        echo -e "${YELLOW}  Ejecuta primero scripts/01-homebrew.sh o reinicia la terminal.${NC}"
+        exit 1
+    fi
+fi
+
 echo -e "${BLUE}Instalando aplicaciones...${NC}"
 
 # =============================================================================
@@ -21,13 +34,16 @@ echo -e "${BLUE}Instalando aplicaciones...${NC}"
 
 echo -e "\n${BLUE}=== Aplicaciones GUI ===${NC}"
 
+# Ítems que fallaron — se reportan al final sin abortar el resto
+FAILED_ITEMS=()
+
 # Array de aplicaciones
 APPS=(
     "visual-studio-code"    # VSCode
     "orbstack"              # OrbStack (Docker/Linux alternative)
     "appcleaner"            # AppCleaner
     "bruno"                 # Bruno API Client
-    "claude-code",          # Claude Code CLI
+    "claude-code"           # Claude Code CLI
     "opencode"              # OpenCode Editor
     "ghostty"               # Ghostty terminal emulator
     "cmux"                  # cmux - Ghostty-based terminal for AI coding agents
@@ -36,10 +52,11 @@ APPS=(
 for app in "${APPS[@]}"; do
     if brew list --cask "$app" &>/dev/null; then
         echo -e "${GREEN}✓ $app ya está instalado${NC}"
-    else
-        echo -e "${BLUE}Instalando $app...${NC}"
-        brew install --cask "$app"
+    elif brew install --cask "$app"; then
         echo -e "${GREEN}✓ $app instalado${NC}"
+    else
+        echo -e "${YELLOW}⚠ Falló la instalación de $app — continuando con la siguiente${NC}"
+        FAILED_ITEMS+=("$app")
     fi
 done
 
@@ -64,14 +81,22 @@ FONTS=(
 for font in "${FONTS[@]}"; do
     if brew list --cask "$font" &>/dev/null; then
         echo -e "${GREEN}✓ $font ya está instalado${NC}"
-    else
-        echo -e "${BLUE}Instalando $font...${NC}"
-        brew install --cask "$font"
+    elif brew install --cask "$font"; then
         echo -e "${GREEN}✓ $font instalado${NC}"
+    else
+        echo -e "${YELLOW}⚠ Falló la instalación de $font — continuando con la siguiente${NC}"
+        FAILED_ITEMS+=("$font")
     fi
 done
 
-echo -e "\n${GREEN}✓ Todas las aplicaciones instaladas${NC}"
+if [[ ${#FAILED_ITEMS[@]} -gt 0 ]]; then
+    echo -e "\n${YELLOW}⚠ Los siguientes ítems fallaron y deben instalarse manualmente:${NC}"
+    for item in "${FAILED_ITEMS[@]}"; do
+        echo -e "${YELLOW}  • $item${NC}"
+    done
+else
+    echo -e "\n${GREEN}✓ Todas las aplicaciones instaladas${NC}"
+fi
 
 # Mostrar resumen
 echo -e "\n${BLUE}=== Aplicaciones Instaladas ===${NC}"
@@ -105,3 +130,8 @@ echo -e ""
 echo -e "${YELLOW}Instalación manual requerida:${NC}"
 echo -e "  • Boring Notch (Dynamic Island) - No disponible via Homebrew"
 echo -e "    Descarga desde: https://www.boringnotch.com/"
+
+# Salir con error para que setup.sh no reporte éxito con instalaciones faltantes
+if [[ ${#FAILED_ITEMS[@]} -gt 0 ]]; then
+    exit 1
+fi
