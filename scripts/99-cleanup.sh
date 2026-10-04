@@ -107,6 +107,7 @@ if [[ "$CLEAN_ALL" == "true" ]] || [[ "$option" == "1" ]]; then
         "boring-notch"
         "bruno"
         "claude-code"
+        "orca"
     )
 
     for app in "${APPS[@]}"; do
@@ -149,6 +150,7 @@ if [[ "$CLEAN_ALL" == "true" ]] || [[ "$option" == "2" ]]; then
         "gping"
         "starship"
         "neovim"
+        "herdr"
     )
 
     for tool in "${CLI_TOOLS[@]}"; do

@@ -88,6 +88,7 @@ make install
   - `starship` - Cross-shell prompt
   - `tmux` - Terminal multiplexer
   - `neovim` - Modern vim-based editor
+  - `herdr` - Agent multiplexer for the terminal
   - `lazyvim` - Pre-configured Neovim IDE distribution
 
 ### 6. macOS Configurations
