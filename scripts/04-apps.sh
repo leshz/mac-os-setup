@@ -47,7 +47,18 @@ APPS=(
     "opencode"              # OpenCode Editor
     "ghostty"               # Ghostty terminal emulator
     "cmux"                  # cmux - Ghostty-based terminal for AI coding agents
+    "orca"                  # Orca (tap stablyai/orca)
 )
+
+# Tap requerido por orca (idempotente)
+if brew tap | grep -qx "stablyai/orca"; then
+    echo -e "${GREEN}✓ tap stablyai/orca ya está agregado${NC}"
+elif brew tap stablyai/orca; then
+    echo -e "${GREEN}✓ tap stablyai/orca agregado${NC}"
+else
+    echo -e "${YELLOW}⚠ Falló el tap stablyai/orca — orca no se podrá instalar${NC}"
+    FAILED_ITEMS+=("tap stablyai/orca")
+fi
 
 for app in "${APPS[@]}"; do
     if brew list --cask "$app" &>/dev/null; then
@@ -111,6 +122,7 @@ echo -e ""
 echo -e "Terminales:"
 echo -e "  • Ghostty"
 echo -e "  • cmux"
+echo -e "  • Orca"
 echo -e ""
 echo -e "Utilidades:"
 echo -e "  • AppCleaner"

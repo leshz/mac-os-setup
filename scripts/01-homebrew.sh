@@ -116,6 +116,7 @@ CLI_MODERN=(
     "lsd"       # Prompt moderno y rápido
     "neovim"    # Editor de texto moderno (vim mejorado)
     "mole"      # Herramienta CLI
+    "herdr"     # Multiplexor de agentes en la terminal
 )
 
 for tool in "${CLI_MODERN[@]}"; do
