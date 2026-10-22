@@ -37,6 +37,10 @@
     # Usa n y N para moverte entre secciones del diff
     navigate = true
 
+    # Vista lado a lado con números de línea
+    side-by-side = true
+    line-numbers = true
+
     # Tema oscuro (o `light = true`, u omitir para auto-detección)
     dark = true
 
