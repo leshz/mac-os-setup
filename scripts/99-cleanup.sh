@@ -174,6 +174,18 @@ if [[ "$CLEAN_ALL" == "true" ]] || [[ "$option" == "2" ]]; then
         rm -rf "$HOME/.local/share/atuin"
         echo -e "${GREEN}✓ Datos de atuin eliminados${NC}"
     fi
+
+    # Quitar delta del gitconfig para que git no quede apuntando a un pager inexistente
+    if command -v git &>/dev/null && [[ -f "$HOME/.gitconfig" ]]; then
+        if [[ "$(git config --global core.pager)" == delta* ]]; then
+            git config --global --unset core.pager
+            echo -e "${GREEN}✓ core.pager (delta) eliminado de ~/.gitconfig${NC}"
+        fi
+        if [[ "$(git config --global interactive.diffFilter)" == delta* ]]; then
+            git config --global --unset interactive.diffFilter
+            echo -e "${GREEN}✓ interactive.diffFilter (delta) eliminado de ~/.gitconfig${NC}"
+        fi
+    fi
 fi
 
 # =============================================================================
