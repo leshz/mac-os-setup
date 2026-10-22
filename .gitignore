@@ -1,2 +1,6 @@
 setup.log
 .DS_Store
+
+# Skill registry (generated locally by agent tooling)
+.atl/skill-registry.md
+.atl/.skill-registry.cache.json

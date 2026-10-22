@@ -26,6 +26,24 @@
     # Usa más cores para operaciones de git
     preloadindex = true
 
+    # Usar delta como pager (requiere: brew install git-delta)
+    pager = delta
+
+[interactive]
+    # Resaltado de delta en git add -p
+    diffFilter = delta --color-only
+
+[delta]
+    # Usa n y N para moverte entre secciones del diff
+    navigate = true
+
+    # Vista lado a lado con números de línea
+    side-by-side = true
+    line-numbers = true
+
+    # Tema oscuro (o `light = true`, u omitir para auto-detección)
+    dark = true
+
 [color]
     # Colores en output
     ui = auto
@@ -171,8 +189,8 @@
     # Incluir sumario en merge commits
     log = true
 
-    # Usar diff3 para conflictos (muestra el ancestro común)
-    conflictstyle = diff3
+    # Usar zdiff3 para conflictos (muestra el ancestro común, recomendado por delta)
+    conflictStyle = zdiff3
 
 [init]
     # Branch por defecto

@@ -110,6 +110,7 @@ CLI_MODERN=(
     "zoxide"    # cd inteligente (aprende tus directorios)
     "atuin"     # Historial de shell mejorado
     "lazygit"   # Git UI en terminal
+    "git-delta" # Pager de diffs con syntax highlighting (delta)
     "gping"     # Ping con gráfico bonito
     "starship"  # Prompt de shell moderno
     "tmux"      # Multiplexor de terminal
