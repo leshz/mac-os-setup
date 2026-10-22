@@ -84,6 +84,7 @@ make install
   - `zoxide` - Smart cd that learns your habits
   - `atuin` - Enhanced shell history
   - `lazygit` - Terminal UI for git
+  - `git-delta` - Syntax-highlighting pager for git diffs
   - `gping` - Ping with a graph
   - `starship` - Cross-shell prompt
   - `tmux` - Terminal multiplexer

@@ -147,6 +147,7 @@ if [[ "$CLEAN_ALL" == "true" ]] || [[ "$option" == "2" ]]; then
         "zoxide"
         "atuin"
         "lazygit"
+        "git-delta"
         "gping"
         "starship"
         "neovim"
